@@ -1,13 +1,3 @@
-html,
-body {
-  /* height: 100%; */
-}
-
-body {
-  /* background: radial-gradient(ellipse at center, #fffeea 0%, #fffeea 35%, #b7e8eb 100%);
-  overflow: hidden; */
-}
-
 .frame {
     position: absolute;
     display: flex;
