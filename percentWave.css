@@ -1,8 +1,10 @@
 .box {
+  margin: 10px;
   height: 100px;
   width: 100px;
   position: absolute;
-  background: #f6fcff;
+  background: radial-gradient(#ffffff, 90%, #000000);
+  box-shadow: 4px 8px 16px 0 rgb(0 0 0 / 10%);
   border-radius: 100%;
   overflow: hidden;
 }
@@ -28,7 +30,7 @@
   width: 100%;
   height: 100%;
   transform: translate(0, 100%);
-  background: linear-gradient(0deg, rgb(3 98 141) 80%, rgb(0, 121, 155) 100%);
+  background: linear-gradient(0deg, rgb(3 98 141) 40%, rgb(0 153 197) 100%);
   transition: all 0.3s;
 }
 .box .water_wave {
@@ -38,12 +40,12 @@
 }
 .box .water_wave_back {
   right: 0;
-  fill: #4c9eb5;
+  fill: #7dcadf;
   animation: wave-back 1.4s infinite linear;
 }
 .box .water_wave_front {
   left: 0;
-  fill: #00799b;
+  fill: #0099c5;
   margin-bottom: -1px;
   animation: wave-front 0.7s infinite linear;
 }
