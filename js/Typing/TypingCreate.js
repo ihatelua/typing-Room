@@ -1,4 +1,5 @@
 import {initTypingTemp} from '../utils/templates.js'    // 샘플데이터를 세팅할 모듈을 가져온다.
+import {defaultTypingData as Contents} from '../utils/TypingMockData.js';
 
 export default function TypingCreate() {
     const textSourceTemp = document.getElementById("textSourceTemp");
@@ -8,9 +9,15 @@ export default function TypingCreate() {
      * 샘플데이터를 세팅한다.
      * @param {TypingMockData} data 
      */
-    const initTypingCreateTemp = (data) => {
-        textSourceTemp.innerHTML = data.author;
-        initTypingTemp(data.contents);
+    const initTypingCreateTemp = () => {
+        const mockSize = Contents.length;
+        const rand = Math.floor(Math.random() * mockSize);
+        const selectContent = Contents[rand];
+
+        textSourceTemp.innerHTML = selectContent.author;
+        initTypingTemp(selectContent.contents);
+
+        return selectContent;
     }
 
     /**
@@ -18,7 +25,9 @@ export default function TypingCreate() {
      */
     const clearTypingTemp = () => {
         textSourceTemp.innerHTML = "";
-        typingTemp.removeChild();
+        while (typingTemp.hasChildNodes()) {
+            typingTemp.removeChild(typingTemp.firstChild);
+        }
     }
 
     /**
