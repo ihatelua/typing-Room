@@ -2,11 +2,13 @@ import Wave from './TypingWave.js';
 import TypingCreate from './TypingCreate.js';
 import {EVENT_TYPE, KEY_TYPE} from '../utils/constants.js';
 import {defaultTypingData as Contents} from '../utils/TypingMockData.js';
+import VowerUtil from './VowerUtil.js';
 
 function TypingMain() {
     const inputTyping = document.getElementById("inputTyping"); // input
     const wave = new Wave();
     let typingCreate = new TypingCreate();
+    let vowerUtil = new VowerUtil();
 
     let startTypingFlag = true;
     let currentPercent = 0;     // 현재 퍼센트값
@@ -22,7 +24,7 @@ function TypingMain() {
 
     // 타이핑 이벤트
     const onTypingHandler = event => {
-        console.log(inputTyping.value + " : " + inputTyping.value.length + " = " + Contents[0].contents[inputTyping.value.length-2])
+        // console.log(inputTyping.value + " : " + inputTyping.value.length + " = " + Contents[0].contents[inputTyping.value.length-2])
         
         if(inputTyping.value.length == 0){
             startTypingFlag = true;             // 시작할때 한 번 실행
@@ -36,7 +38,7 @@ function TypingMain() {
         }
     
         if(event.code == KEY_TYPE.SPACE){
-            perfectTypingCheck();               // 문자열이 정확한지 확인
+            // perfectTypingCheck();               // 문자열이 정확한지 확인
         }
     
         if(event.code == KEY_TYPE.ENTER){
@@ -45,9 +47,58 @@ function TypingMain() {
     }
 
     /**
+     * 타이핑이 완료됐을때 체크
+     */
+    const perfectTypingCheck = () => {
+        let typingValue = inputTyping.value;
+        let answer = Contents[0].contents;
+
+        if(typingValue.lastIndexOf(answer.charAt(answer.length-1)) === answer.length - 1){
+            let typingCount = vowerUtil.getConstantVowelCount(answer);
+
+            let endTime = new Date();
+            let resultTime=(endTime.getTime()-startTime.getTime()) / 1000;
+
+            console.log(typingCount * 60 / resultTime );
+            console.log("typingCount : " + typingCount + " startTime : " + resultTime)
+            // console.log("통과!")
+        }else{
+            console.log("실패ㅠㅠ");
+        }
+        // inputTyping.value.lastIndexOf(Contents[0].contents.at(Contents[0].contents.length-1))
+        // Contents[0].contents.length-1 이 같다면 통과
+        // Contents[0]
+    }
+
+
+    /**
+     * 실시간 체킹 Strat
+     */
+    const liveCheck = () => {
+        // 실시간 타이핑 체크
+        setInterval(() => {
+            const typingValue = inputTyping.value;
+            return liveTypingCheck(typingValue);
+        }, 0);
+
+        // 실시간 문자열 검사
+        setInterval(() => {
+            const typingValue = inputTyping.value;
+            return liveStringCheck(typingValue);
+        }, 0);
+    }
+    
+    /**
+     * 실시간 체킹 Stop
+     */
+    const stopLiveCheck = () => {
+        clearInterval();
+    }
+
+    /**
      * 실시간 타이핑 체크
      */
-    const liveTypingCheck = async(typingValue) => {
+     const liveTypingCheck = async(typingValue) => {
         return new Promise((resolve, reject) => {
             const typingValue = inputTyping.value;
             const selectContents = document.querySelectorAll("#tempContents");
@@ -55,11 +106,11 @@ function TypingMain() {
             for(let i=0;i<typingValue.length;i++){
                 if(typingValue.length <= displayText.length){
                     if(i != 0){
-                        if(displayText.charAt(i-1)!=typingValue.charAt(i-1)){   // 문자가 일치하지않으면
+                        if(displayText.charAt(i-1) != typingValue.charAt(i-1)){   // 문자가 일치하지않으면
                             selectContents[i-1].className = "wrong";
                             missTypingNum++;
                         }
-                        if(displayText.charAt(i-1)==typingValue.charAt(i-1)){   // 문자가 일치하면
+                        if(displayText.charAt(i-1) == typingValue.charAt(i-1)){   // 문자가 일치하면
                             selectContents[i-1].className = "correct";
                         }
                     }
@@ -110,50 +161,13 @@ function TypingMain() {
         });
     }
 
-
     /**
-     * 타이핑이 완료됐을때 체크
+     * 초기화
      */
-    const perfectTypingCheck = () => {
-        let typingValue = inputTyping.value;
-        let answer = Contents[0].contents;
-
-        if(typingValue.lastIndexOf(answer.charAt(answer.length-1)) === answer.length - 1){
-            console.log("통과!")
-        }else{
-            console.log("실패ㅠㅠ");
-        }
-        // inputTyping.value.lastIndexOf(Contents[0].contents.at(Contents[0].contents.length-1))
-        // Contents[0].contents.length-1 이 같다면 통과
-        // Contents[0]
-    }
-
-
-    /**
-     * 초반 세팅
-     */
-    const initTypingSetting = async() => {
+     const initTypingSetting = async() => {
         typingCreate.initTypingCreateTemp(Contents[0]);
         wave.setWave(40);
         liveCheck();        // 실시간 체킹
-    }
-
-    const liveCheck = () => {
-        // 실시간 타이핑 체크
-        setInterval(() => {
-            const typingValue = inputTyping.value;
-            return liveTypingCheck(typingValue);
-        }, 0);
-
-        // 실시간 문자열 검사
-        setInterval(() => {
-            const typingValue = inputTyping.value;
-            return liveStringCheck(typingValue);
-        }, 0);
-    }
-    
-    const stopLiveCheck = () => {
-        clearInterval();
     }
 
 
