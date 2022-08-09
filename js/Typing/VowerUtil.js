@@ -13,26 +13,31 @@ export default function VowerUtil() {
         for(let i = 0; i < str.length; i++){
             let uni = str.charCodeAt(i);
 
-            uni = uni - ga;
+            // 한글일때만
+            if(44032 <= uni && uni <= 55203){
+                uni = uni - ga;
     
-            let f = parseInt(uni / 588);
-            let m = parseInt((uni - (f * 588)) / 28);
-            let l = parseInt(uni % 28);
-            
-            // 초성 계산
-            if(FIRST[f] != ""){
-                size += 1;
-            }
-
-            // 중성 계산
-            if(SPECIAL.indexOf(MIDDLE[m]) != -1){ // 특별한 문자라면 'ㅙ, ㅢ, ㄶ, ㅄ ... '
-                size += 2;
+                let f = parseInt(uni / 588);
+                let m = parseInt((uni - (f * 588)) / 28);
+                let l = parseInt(uni % 28);
+                
+                // 초성 계산
+                if(FIRST[f] != ""){
+                    size += 1;
+                }
+    
+                // 중성 계산
+                if(SPECIAL.indexOf(MIDDLE[m]) != -1){ // 특별한 문자라면 'ㅙ, ㅢ, ㄶ, ㅄ ... '
+                    size += 2;
+                }else{
+                    size += 1;
+                }
+    
+                // 종성 계산
+                if(LAST[l] != ""){
+                    size += 1;
+                }
             }else{
-                size += 1;
-            }
-
-            // 종성 계산
-            if(LAST[l] != ""){
                 size += 1;
             }
         }

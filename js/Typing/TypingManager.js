@@ -6,6 +6,7 @@ import VowerUtil from './VowerUtil.js';
 
 function TypingMain() {
     const inputTyping = document.getElementById("inputTyping"); // input
+    const typingSpeed = document.getElementById("typingSpeed"); // 타수
     const wave = new Wave();
     let typingCreate = new TypingCreate();
     let vowerUtil = new VowerUtil();
@@ -30,10 +31,12 @@ function TypingMain() {
             startTypingFlag = true;             // 시작할때 한 번 실행
             typingCreate.resetTypingTemp();     // 샘플데이터 리셋하기
             missTypingNum = 0;                  // 틀린갯수 초기화
+            stopLiveCheck();                    // 실시간 체킹 종료
         }
         
         if(inputTyping.value.length > 1 && startTypingFlag){
             startTime = new Date();             // 시간 측정 시작
+            liveCheck();                        // 실시간 체킹 시작
             startTypingFlag = false;            
         }
     
@@ -79,13 +82,17 @@ function TypingMain() {
         setInterval(() => {
             const typingValue = inputTyping.value;
             return liveTypingCheck(typingValue);
-        }, 0);
+        }, 60);
 
-        // 실시간 문자열 검사
+        // 실시간 타수 체크
         setInterval(() => {
-            const typingValue = inputTyping.value;
-            return liveStringCheck(typingValue);
-        }, 0);
+            const correctValues = document.querySelectorAll("#tempContents.correct");
+            let resultValue = "";
+            for(let i = 0; i < correctValues.length; i++) {
+                resultValue += correctValues[i].innerHTML
+            }
+            return liveTypingSpeed(resultValue);
+        }, 100);
     }
     
     /**
@@ -95,55 +102,38 @@ function TypingMain() {
         clearInterval();
     }
 
+
     /**
      * 실시간 타이핑 체크
      */
-     const liveTypingCheck = async(typingValue) => {
+    const liveTypingCheck = async(typingValue) => {
         return new Promise((resolve, reject) => {
-            const typingValue = inputTyping.value;
             const selectContents = document.querySelectorAll("#tempContents");
             const displayText = Contents[0].contents;
             for(let i=0;i<typingValue.length;i++){
                 if(typingValue.length <= displayText.length){
-                    if(i != 0){
-                        if(displayText.charAt(i-1) != typingValue.charAt(i-1)){   // 문자가 일치하지않으면
-                            selectContents[i-1].className = "wrong";
-                            missTypingNum++;
-                        }
-                        if(displayText.charAt(i-1) == typingValue.charAt(i-1)){   // 문자가 일치하면
-                            selectContents[i-1].className = "correct";
-                        }
+                    // 일치하지않는 문자가 빈값일때
+                    if(displayText.charAt(i) == " " && typingValue.charAt(i) != " "){ 
+                        selectContents[i].innerHTML = "_"; 
+                        selectContents[i].className = "wrong";
+                        missTypingNum++;
                     }
-                }
-            }
-            resolve();
-        });
-    }
+                    
+                    // 일치한 문자가 빈값일때
+                    if(displayText.charAt(i) == " " && typingValue.charAt(i) == " "){ 
+                        selectContents[i].innerHTML = " "; 
+                        selectContents[i].className = "correct";
+                    }
 
-    /**
-     * 실시간 문자열 검사
-     * 타이핑체크와 함께 돌아감.
-     * 띄어쓰기부분이 잘 못될때 '_'와 스타일을 변경시킨다.
-     */
-    const liveStringCheck = async(typingValue) => {
-        return new Promise((resolve, reject) => {
-            const selectContents = document.querySelectorAll("#tempContents");
-            const displayText = Contents[0].contents;
-            for(let i=0;i<typingValue.length;i++){
-                if(typingValue.length <= displayText.length){
-                    if(i != 0){
-                        // 일치하지않는 문자가 빈값일때
-                        if(displayText.charAt(i-1) == " " && typingValue.charAt(i-1) != " "){ 
-                            selectContents[i-1].innerHTML = "_"; 
-                            selectContents[i-1].className = "wrong";
-                        }
-                        
-                        // 일치한 문자가 빈값일때
-                        if(displayText.charAt(i-1) == " " && typingValue.charAt(i-1) == " "){ 
-                            selectContents[i-1].innerHTML = " "; 
-                            selectContents[i-1].className = "correct";
-                        }
+                    if(displayText.charAt(i) == typingValue.charAt(i)){   // 문자가 일치하면
+                        selectContents[i].className = "correct";
+                    }else if(typingValue.length == i+1){
+                        selectContents[i].className = "normal";
+                    }else{
+                        selectContents[i].className = "wrong";
+                        missTypingNum++;
                     }
+
                 }
             }
 
@@ -161,13 +151,31 @@ function TypingMain() {
         });
     }
 
+    const liveTypingSpeed = (correctValue) => {
+        return new Promise((resolve, reject) => {
+            let typingCount = vowerUtil.getConstantVowelCount(correctValue);
+
+            let endTime = new Date();
+            let resultTime = (endTime.getTime() - startTime.getTime()) / 1000;
+            let resultSpeed = parseInt(typingCount * 60 / resultTime) - (missTypingNum * 5) + 17;
+            
+            if(resultSpeed < 0){
+                typingSpeed.innerHTML = 0;
+            }else{
+                typingSpeed.innerHTML = resultSpeed;
+            }
+            
+
+            resolve();
+        });
+    }
+
     /**
      * 초기화
      */
      const initTypingSetting = async() => {
         typingCreate.initTypingCreateTemp(Contents[0]);
         wave.setWave(40);
-        liveCheck();        // 실시간 체킹
     }
 
 
