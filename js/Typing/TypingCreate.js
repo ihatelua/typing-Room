@@ -28,6 +28,9 @@ export default function TypingCreate() {
         const tempContents = document.querySelectorAll("#tempContents");
         for(let i = 0; i < tempContents.length; i++){
             tempContents[i].className = "normal";
+            if(tempContents[i].innerHTML == "_"){
+                tempContents[i].innerHTML = " ";
+            }
         }
     }
 
