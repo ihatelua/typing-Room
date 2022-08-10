@@ -1,8 +1,11 @@
-import {FIRST_CONSONANT as FIRST, MIDDLE_VOWER as MIDDLE, LAST_CONSONANT as LAST, SPECIAL_VOWER as SPECIAL} from '../utils/constants.js';
+import {FIRST_CONSONANT as FIRST, MIDDLE_VOWER as MIDDLE, LAST_CONSONANT as LAST, SPECIAL_VOWER as SPECIAL} from '../utils/constants.js';   // 한글의 초성,중성,종성을 가져온다.
 
+/**
+ * 문자 계산 Manager 
+ */
 export default function VowerUtil() {
     /**
-     * 문지열 타수 계산
+     * 문자열 타수 계산
      * @param {문자열} kor 
      * @returns 
      */

@@ -1,5 +1,6 @@
 /**
  * 타이핑할 샘플데이터
+ * DataBase 연결 전까지 사용할 것
  */
 export const defaultTypingData = [
     {
