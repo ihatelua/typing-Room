@@ -34,4 +34,80 @@ export const LAST_CONSONANT = [
 export const SPECIAL_VOWER = [
     'ㅘ', 'ㅙ', 'ㅚ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅢ',
     'ㄳ', 'ㄵ', 'ㄶ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄾ', 'ㅀ', 'ㅄ'
-]
+];
+
+
+// 노말 CSS 데이터
+export const LEVEL_1 = [
+    "base",
+    "keyboard"
+];
+
+export const LEVEL_2 = [
+    "base",
+    "desk",
+    "plant",
+    "window",
+    "keyboard"
+];
+
+export const LEVEL_3 = [
+    "base",
+    "desk",
+    "lamp",
+    "waterPurifier",
+    "wardrobe",
+    "sideTable",
+    "drawer",
+    "prop1",
+    "prop2",
+    "wallDesk",
+    "book",
+    "keyboard"
+];
+
+export const LEVEL_4 = [
+    "base",
+    "desk",
+    "chair",
+    "plant1",
+    "plant2",
+    "wallBase",
+    "tape1",
+    "tape2",
+    "wallPlant1",
+    "wallPlant2",
+    "wallPlant4",
+    "wallPlant5",
+    "wallPlant6",
+    "frame",
+    "forest",
+    "keyboard"
+];
+
+export const LEVEL_5 = [
+    "base",
+    "sideDesk",
+    "mirror",
+    "plant",
+    "wallSticker",
+    "sideDesk2",
+    "book1",
+    "book2",
+    "book3",
+    "fan",
+    "remoteControl",
+    "airConditioner",
+    "clock",
+    "frame",
+    "bed",
+    "pillow1",
+    "pillow2",
+    "lamp",
+    "window",
+    "curtainBase",
+    "curtain",
+    "frontDesk",
+    "tv",
+    "keyboard"
+];

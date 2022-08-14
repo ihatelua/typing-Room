@@ -1,0 +1,5 @@
+
+/*
+    let aaaa = document.getElementsByClassName("keyboard")
+    aaaa[0].classList.remove("none")
+*/
