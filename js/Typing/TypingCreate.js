@@ -1,6 +1,10 @@
-import {initTypingTemp} from '../utils/templates.js'    // 샘플데이터를 세팅할 모듈을 가져온다.
-import {defaultTypingData as Contents} from '../utils/TypingMockData.js';
+import {defaultTypingData as Contents} from '../utils/TypingMockData.js';   // 샘플데이터를 가져온다.
+import {initTypingTemp} from '../utils/templates.js'                        // 샘플데이터를 세팅모듈을 가져온다.
 
+/**
+ * 샘플데이터 Manager
+ * @returns 
+ */
 export default function TypingCreate() {
     const textSourceTemp = document.getElementById("textSourceTemp");
     const typingTemp = document.getElementById("typingTemp");

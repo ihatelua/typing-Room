@@ -66,7 +66,7 @@ function TypingMain() {
         if(typingValue.length-1 == answer.length ){
             const passData = getCorrectContents().length;
             const failData = answer.length - passData;
-            const wordAccuracy = Math.floor(passData / answer.length * 100) - failData;     // 정확도 계산
+            const wordAccuracy = parseInt(Math.floor(passData / answer.length * 100) - failData);     // 정확도 계산
             const wordSpeed = typingSpeed.innerHTML;                                 // 현재타수
             
             // 최근타수 아카이브 저장
@@ -87,6 +87,7 @@ function TypingMain() {
             // 카운트 아카이브 저장
             archive.count++;
 
+            wave.addWave(50);   // wave 10% 추가
             setResultBox();     // 결과값 세팅
             restartGame();      // 게임 재시작
         }
@@ -96,10 +97,10 @@ function TypingMain() {
      * 결과값 세팅
      */
     const setResultBox = () => {
-        document.getElementById("resultPrevSpeed").innerHTML = archive.prevSpeed;   // 최근타수
-        document.getElementById("resultAcc").innerHTML = archive.accuracy;          // 정확도
-        document.getElementById("resultMax").innerHTML = archive.maxSpeed;          // 최고타수
-        document.getElementById("typingCount").innerHTML = archive.count;           // 카운트
+        document.getElementById("resultPrevSpeed").innerHTML    = archive.prevSpeed;   // 최근타수
+        document.getElementById("resultAcc").innerHTML          = archive.accuracy;    // 정확도
+        document.getElementById("resultMax").innerHTML          = archive.maxSpeed;    // 최고타수
+        document.getElementById("typingCount").innerHTML        = archive.count;       // 카운트
     }
 
     /**
@@ -233,7 +234,7 @@ function TypingMain() {
      */
      const initTypingSetting = async() => {
         tempContent = typingCreate.initTypingCreateTemp();
-        wave.setWave(40);
+        wave.setWave(0);
     }
 
 
