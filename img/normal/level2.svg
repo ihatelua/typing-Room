@@ -1,9 +1,5 @@
+<?xml-stylesheet type="text/css" href="../../css/gameMap.css"?>
 <svg width="957" height="957" viewBox="0 0 957 957" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <style>
-        .none{
-            display: none;
-        }
-    </style>
 <g class="level2">
 <g class="base none">
 <path id="group" d="M749 270L477.5 162.5V433.5L749 541V270Z" fill="url(#paint0_linear_18_2491)"></path>

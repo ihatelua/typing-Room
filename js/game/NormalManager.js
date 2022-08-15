@@ -21,6 +21,7 @@ export default function NormalManager() {
             currentLevel = model.level;
             currentRound = getLevelObject(currentLevel, currentObjectCount);           // 현재 오브젝트 저장
             gameRoom.getElementsByClassName(currentRound)[0].classList.remove("none"); // 오브젝트 보이기
+            gameRoom.getElementsByClassName(currentRound)[0].classList.add("view");   // 오브젝트 보이기
         };
     };
 
@@ -29,6 +30,7 @@ export default function NormalManager() {
         if(getLevelLength(currentLevel) != currentObjectCount + 1){    // 다음라운드로
             currentRound = getLevelObject(currentLevel, ++currentObjectCount);
             gameRoom.getElementsByClassName(currentRound)[0].classList.remove("none"); // 오브젝트 보이기
+            gameRoom.getElementsByClassName(currentRound)[0].classList.add("view");   // 오브젝트 보이기
         }else{  // 다음레벨로
             currentObjectCount = 0;
             object.remove();
