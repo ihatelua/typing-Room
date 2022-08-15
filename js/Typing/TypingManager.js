@@ -29,7 +29,7 @@ export default function TypingManager() {
     }
 
     // 변수값 초기화
-    let successPoint = 60;  // 성공시 게이지퍼센트
+    let successPoint = 100;  // 성공시 게이지퍼센트
 
 
     // 타이핑 이벤트

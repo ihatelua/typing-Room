@@ -15,15 +15,15 @@ export default function Wave() {
 
     // wave 퍼센트 추가
     const addWave = (num) => {
-        if(currentPercent + num <= 100){
-            percentCount.innerHTML = currentPercent + num;
-            percentWater.style.transform = 'translate(0'+','+(100-(currentPercent + num))+'%)';
+        if(currentPercent + num < 100){
             currentPercent += num;
+            percentCount.innerHTML = currentPercent;
+            percentWater.style.transform = 'translate(0'+','+(100-(currentPercent))+'%)';
         }else{
-            percentCount.innerHTML = 100;
-            percentWater.style.transform = 'translate(0'+','+(100-(100))+'%)';
-            currentPercent = 100;
-            percentCount.dispatchEvent(new CustomEvent("pass", {}));
+            currentPercent = (currentPercent + num) - 100;
+            percentCount.innerHTML = currentPercent;
+            percentWater.style.transform = 'translate(0'+','+(100-(currentPercent))+'%)';
+            percentCount.dispatchEvent(new CustomEvent("pass", {}));    // 커스텀 이벤트 실행
         }
     }
 
