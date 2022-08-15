@@ -12,7 +12,7 @@ function Admin() {
 
     const setModules = () => {
         typingMain.init();              // 타이핑 세팅
-        normalManager.initRoomSetting(3);
+        normalManager.initRoomSetting(1);
     }
 
     const setEvent = () => {

@@ -13,7 +13,6 @@ export default function NormalManager() {
         initGameRoomTemp("normal", level);
 
         document.getElementById("room").onload = function() {
-            debugger;
             object = document.querySelector('.room')
             gameRoom = object.contentDocument
             
@@ -29,7 +28,6 @@ export default function NormalManager() {
             currentRound = getLevelObject(currentLevel, ++currentObjectCount);
             gameRoom.getElementsByClassName(currentRound)[0].classList.remove("none"); // 오브젝트 보이기
         }else{  // 다음레벨로
-            debugger;
             currentObjectCount = 0;
             object.remove();
             initRoomSetting(++currentLevel)
