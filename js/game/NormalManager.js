@@ -1,5 +1,5 @@
-import {NORMAL_LEVEL_1, NORMAL_LEVEL_2, NORMAL_LEVEL_3, NORMAL_LEVEL_4, NORMAL_LEVEL_5} from '../utils/constants.js';
-import {initGameRoomTemp} from '../utils/templates.js'                        // 룸 데이터 세팅모듈을 가져온다.
+import {NORMAL_LEVEL_1, NORMAL_LEVEL_2, NORMAL_LEVEL_3, NORMAL_LEVEL_4, NORMAL_LEVEL_5} from '../utils/constants.js';   // 노말 데이터를 가져온다.
+import {initGameRoomTemp} from '../utils/templates.js'  // 룸 데이터 세팅모듈을 가져온다.
 
 export default function NormalManager() {
     const background = document.getElementById("mainhead");
@@ -29,18 +29,18 @@ export default function NormalManager() {
         };
     };
 
-    // 다음라운드로
+    
     const nextRoomObject = () => {
-        if(getLevelLength(currentLevel) != currentObjectCount + 1){    // 다음라운드로
+        // 다음라운드로
+        if(getLevelLength(currentLevel) != currentObjectCount + 1){  
             currentRound = getLevelObject(currentLevel, ++currentObjectCount);
-            gameRoom.getElementsByClassName(currentRound)[0].classList.remove("none"); // 오브젝트 보이기
-            gameRoom.getElementsByClassName(currentRound)[0].classList.add("vibration");   // 오브젝트 애니메이션 추가
-        }else{  // 다음레벨로
+            gameRoom.getElementsByClassName(currentRound)[0].classList.remove("none");      // 오브젝트 보이기
+            gameRoom.getElementsByClassName(currentRound)[0].classList.add("vibration");    // 오브젝트 애니메이션 추가
+        } else{  // 다음레벨로
             currentObjectCount = 0;
             object.remove();
             initRoomSetting({level: ++currentLevel, background: backgroundColor})
         }
-        
     }
 
     // 레벨의 총 길이를 가져온다.
