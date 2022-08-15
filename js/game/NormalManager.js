@@ -2,21 +2,23 @@ import {NORMAL_LEVEL_1, NORMAL_LEVEL_2, NORMAL_LEVEL_3, NORMAL_LEVEL_4, NORMAL_L
 import {initGameRoomTemp} from '../utils/templates.js'                        // 룸 데이터 세팅모듈을 가져온다.
 
 export default function NormalManager() {
+    const background = document.getElementById("mainhead");
     let object;                 // 룸 요소
-    let gameRoom;              // 룸 svg 요소
+    let gameRoom;               // 룸 svg 요소
     let currentLevel;           // 현재 레벨
     let currentRound;           // 현재 라운드 오브젝트
     let currentObjectCount = 0  // 현재 라운드 수
 
     // 룸 세팅
-    const initRoomSetting = (level) => {
-        initGameRoomTemp("normal", level);
+    const initRoomSetting = (model) => {
+        background.className = "mainhead " + model.background;
+        initGameRoomTemp("normal", model.level);                // 노말맵 SVG 템플릿을 세팅한다.
 
         document.getElementById("room").onload = function() {
             object = document.querySelector('.room')
             gameRoom = object.contentDocument
             
-            currentLevel = level;
+            currentLevel = model.level;
             currentRound = getLevelObject(currentLevel, currentObjectCount);           // 현재 오브젝트 저장
             gameRoom.getElementsByClassName(currentRound)[0].classList.remove("none"); // 오브젝트 보이기
         };

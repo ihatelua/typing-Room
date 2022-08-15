@@ -1,6 +1,14 @@
 
-div#mainhead{  
+div.mainhead.red{  
     background-image: url("../img/background/red.jpg");
+}  
+
+div.mainhead.black{  
+    background-image: url("../img/background/black.jpg");
+}  
+
+div.mainhead.green{  
+    background-image: url("../img/background/green.jpg");
 }  
 
 .room {

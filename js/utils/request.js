@@ -1,3 +1,6 @@
+/**
+ * Get 파라미터 값을 가져온다.
+ */
 export default function Request() {
     this.getParameter = function(name) {  
         var rtnval = '';  

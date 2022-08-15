@@ -29,7 +29,7 @@ export default function TypingManager() {
     }
 
     // 변수값 초기화
-    let successPoint = 100;  // 성공시 게이지퍼센트
+    let successPoint  // 성공시 게이지퍼센트
 
 
     // 타이핑 이벤트
@@ -232,7 +232,8 @@ export default function TypingManager() {
     /**
      * 초기화
      */
-     const initTypingSetting = async() => {
+     const initTypingSetting = async(point) => {
+        successPoint = point;                  // 성공시 퍼센트게이지
         tempContent = typingCreate.initTypingCreateTemp();
         wave.setWave(0);
     }
@@ -246,8 +247,8 @@ export default function TypingManager() {
     }
 
 
-    this.init = () => {
-        initTypingSetting();
+    this.init = (model) => {
+        initTypingSetting(model);
         initEventListeners();
     }
 }
