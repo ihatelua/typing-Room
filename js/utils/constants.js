@@ -40,12 +40,12 @@ export const SPECIAL_VOWER = [
 
 
 // 노말 CSS 데이터
-export const LEVEL_1 = [
+export const NORMAL_LEVEL_1 = [
     "base",
     "keyboard"
 ];
 
-export const LEVEL_2 = [
+export const NORMAL_LEVEL_2 = [
     "base",
     "desk",
     "plant",
@@ -53,7 +53,7 @@ export const LEVEL_2 = [
     "keyboard"
 ];
 
-export const LEVEL_3 = [
+export const NORMAL_LEVEL_3 = [
     "base",
     "desk",
     "lamp",
@@ -68,7 +68,7 @@ export const LEVEL_3 = [
     "keyboard"
 ];
 
-export const LEVEL_4 = [
+export const NORMAL_LEVEL_4 = [
     "base",
     "desk",
     "chair",
@@ -87,7 +87,7 @@ export const LEVEL_4 = [
     "keyboard"
 ];
 
-export const LEVEL_5 = [
+export const NORMAL_LEVEL_5 = [
     "base",
     "sideDesk",
     "mirror",

@@ -4,10 +4,11 @@
 
 import Wave from './TypingWave.js';
 import TypingCreate from './TypingCreate.js';
+import NormalManager from '../game/NormalManager.js'
 import {EVENT_TYPE, KEY_TYPE} from '../utils/constants.js';
 import VowerUtil from './VowerUtil.js';
 
-function TypingMain() {
+export default function TypingManager() {
     const inputTyping = document.getElementById("inputTyping"); // input
     const typingSpeed = document.getElementById("typingSpeed"); // 타수
     const wave = new Wave();
@@ -20,7 +21,6 @@ function TypingMain() {
     let startTime = 0;          // start 시간
     let missScore = 0;          // 감점
 
-
     let archive = {
         prevSpeed: 0,   // 최근타수
         maxSpeed: 0,    // 최고타수
@@ -28,11 +28,12 @@ function TypingMain() {
         count: 0        // 카운트
     }
 
+    // 변수값 초기화
+    let successPoint = 60;  // 성공시 게이지퍼센트
+
 
     // 타이핑 이벤트
     const onTypingHandler = event => {
-        // console.log(inputTyping.value + " : " + inputTyping.value.length + " = " + tempContent.contents[inputTyping.value.length-2])
-        
         if(inputTyping.value.length == 0){
             startTypingFlag = true;             // 시작할때 한 번 실행
             typingCreate.resetTypingTemp();     // 샘플데이터 리셋하기
@@ -62,7 +63,6 @@ function TypingMain() {
         let typingValue = inputTyping.value;
         let answer = tempContent.contents;
 
-        // if(typingValue.lastIndexOf(answer.charAt(answer.length-1)) === answer.length - 1){
         if(typingValue.length-1 == answer.length ){
             const passData = getCorrectContents().length;
             const failData = answer.length - passData;
@@ -87,7 +87,7 @@ function TypingMain() {
             // 카운트 아카이브 저장
             archive.count++;
 
-            wave.addWave(50);   // wave 10% 추가
+            wave.addWave(successPoint); 
             setResultBox();     // 결과값 세팅
             restartGame();      // 게임 재시작
         }
@@ -251,6 +251,3 @@ function TypingMain() {
         initEventListeners();
     }
 }
-
-const typingMain = new TypingMain();
-typingMain.init();

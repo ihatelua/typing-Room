@@ -19,6 +19,11 @@ export default function Wave() {
             percentCount.innerHTML = currentPercent + num;
             percentWater.style.transform = 'translate(0'+','+(100-(currentPercent + num))+'%)';
             currentPercent += num;
+        }else{
+            percentCount.innerHTML = 100;
+            percentWater.style.transform = 'translate(0'+','+(100-(100))+'%)';
+            currentPercent = 100;
+            percentCount.dispatchEvent(new CustomEvent("pass", {}));
         }
     }
 

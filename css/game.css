@@ -3,9 +3,8 @@ div#mainhead{
     background-image: url("../img/background/red.jpg");
 }  
 
-.gameBox {
+.room {
     position: absolute;
-    content: url(../img/normal/level1.svg);
     width: 22rem;
     margin-top: -2rem;
     margin-left: 14rem;
