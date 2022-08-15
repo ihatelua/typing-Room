@@ -8,20 +8,24 @@ export default function NormalManager() {
     let currentLevel;           // 현재 레벨
     let currentRound;           // 현재 라운드 오브젝트
     let currentObjectCount = 0  // 현재 라운드 수
+    let backgroundColor = "";
 
     // 룸 세팅
     const initRoomSetting = (model) => {
-        background.className = "mainhead " + model.background;
-        initGameRoomTemp("normal", model.level);                // 노말맵 SVG 템플릿을 세팅한다.
+        backgroundColor = model.background;
+        currentLevel = model.level;
+
+        background.className = "mainhead " + backgroundColor;
+        initGameRoomTemp("normal", currentLevel);                // 노말맵 SVG 템플릿을 세팅한다.
 
         document.getElementById("room").onload = function() {
             object = document.querySelector('.room')
             gameRoom = object.contentDocument
             
-            currentLevel = model.level;
             currentRound = getLevelObject(currentLevel, currentObjectCount);           // 현재 오브젝트 저장
             gameRoom.getElementsByClassName(currentRound)[0].classList.remove("none"); // 오브젝트 보이기
-            gameRoom.getElementsByClassName(currentRound)[0].classList.add("view");   // 오브젝트 보이기
+            // gameRoom.getElementsByClassName(currentRound)[0].classList.add("view");    // 오브젝트 애니메이션 추가
+            gameRoom.getElementsByClassName(currentRound)[0].classList.add("vibration");    // 오브젝트 애니메이션 추가
         };
     };
 
@@ -30,11 +34,11 @@ export default function NormalManager() {
         if(getLevelLength(currentLevel) != currentObjectCount + 1){    // 다음라운드로
             currentRound = getLevelObject(currentLevel, ++currentObjectCount);
             gameRoom.getElementsByClassName(currentRound)[0].classList.remove("none"); // 오브젝트 보이기
-            gameRoom.getElementsByClassName(currentRound)[0].classList.add("view");   // 오브젝트 보이기
+            gameRoom.getElementsByClassName(currentRound)[0].classList.add("vibration");   // 오브젝트 애니메이션 추가
         }else{  // 다음레벨로
             currentObjectCount = 0;
             object.remove();
-            initRoomSetting(++currentLevel)
+            initRoomSetting({level: ++currentLevel, background: backgroundColor})
         }
         
     }

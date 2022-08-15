@@ -11,7 +11,7 @@ function Admin() {
     
     // 공통 세팅 변수
     const model = {
-        successPoint     : 30,      // 성공시 퍼센트 게이지
+        successPoint     : 100,      // 성공시 퍼센트 게이지
         normalBackground : "red",   // 노말맵 백그라운드
     }
 

@@ -1,13 +1,60 @@
 .none{
     opacity: 0;
 }
+
+/*페이드인*/
 .view{
     opacity: 1;
+
     animation: fadein 2s;
     -moz-animation: fadein 2s; /* Firefox */
     -webkit-animation: fadein 2s; /* Safari and Chrome */
     -o-animation: fadein 2s; /* Opera */
 }
+
+.vibration {
+    opacity: 1;
+    animation: vibration .5s;
+}
+
+@keyframes vibration {
+0% {
+    opacity: 0;
+    transform: skew(0.3deg, 0.3deg);
+}
+
+25%{
+    transform: skew(0.6deg, 0.6deg);
+}
+
+50%{
+    transform: skew(-0.6deg, -0.6deg);
+}
+
+75%{
+    transform: skew(0.3deg, 0.3deg);
+}
+
+100% {
+    opacity: 1;
+    transform: skew(0deg, 0deg);
+}
+}
+
+
+@keyframes flash {
+    to {
+        opacity: 1;
+   }
+}
+@keyframes flashText {
+    to {
+        opacity: 0.15;
+   }
+}
+
+
+/*페이드인*/
 @keyframes fadein {
     from {
         opacity: 0;
