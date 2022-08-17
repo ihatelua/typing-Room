@@ -1,0 +1,169 @@
+
+/* 지울예정 */
+body{
+    background-image: url("../img/background/green.jpg");
+}
+
+/* 지울예정 */
+.pop-btn{
+    display:inline-flex;
+    margin-top:20%;
+    width:50%;
+    height:100%;
+    float:left;
+    justify-content:center;
+    align-items:center;
+    color:#ffffff;
+    cursor:pointer;
+}
+
+/* 지울예정 */
+.none{
+    display: none;
+}
+
+.modalWrap{
+    background-color: rgba(0,0,0,.3);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 15px;
+}
+
+.resultModal{
+    position: fixed;
+    display: block;
+    z-index: 200;
+    top: 15%;
+    left: 30%;
+    width: 800px;
+    height: 600px;
+}
+
+.resultModal .resultModalTopBar {
+    position: absolute;
+    width: 100%;
+    height: 65%;
+
+    background: #2120BD;
+    border-radius: 40px;
+    z-index: 20
+}
+
+.resultModal .resultModalMiddleBar {
+    position: absolute;
+    width: 100%;
+    height: 40%;
+
+    margin-top: 35%;
+
+    background: #F7F8FD;
+    z-index: 30
+}
+
+.resultModal .resultModalFooterBar {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+
+    margin-top: 45%;
+
+    background: #F7F8FD;
+    border-radius: 40px;
+    z-index: 10
+}
+
+/* 하단 결과값*/
+.split {
+    position: absolute;
+
+    top: 48%;
+
+    width: 95%;
+    height: 50%;
+    
+    z-index: 40;
+}
+
+.split .left {
+    position: inherit;
+    margin-left: 20px;
+    margin-top: 20px;
+
+    width: 40%;
+    height: 100%;
+    
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.15); 
+    border-radius: 40px;
+    background: #ffffff;
+
+    z-index: 50;
+}
+
+.split .right {
+    position: inherit;
+    margin-left: 10px;
+    margin-top: 20px;
+
+    left: 45%;
+    width: 56%;
+    height: 100%;
+    
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.15);   
+    border-radius: 40px;
+    background: #ffffff;
+
+    z-index: 50;
+}
+
+/* 차트부분 */
+.split .left .cardLabel {
+    /* position: inherit; */
+
+    margin-left: 15px;
+    margin-top: 15px;
+
+    width: 88%;
+    height: 8%;
+    /* border: 1px solid rgb(0, 0, 0); */
+
+    font-family: 'Inter';
+    color:#6F6F6F;
+
+    z-index: 51;
+}
+
+.split .left .cardBody {
+    /* position: inherit; */
+    margin-left: 15px;
+
+    width: 88%;
+    height: 70%;
+    /* border: 1px solid rgb(0, 0, 0); */
+
+    z-index: 51;
+}
+
+.split .left .cardFooter {
+    /* position: inherit; */
+    margin-left: 15px;
+
+    width: 88%;
+    height: 10%;
+
+    /* border: 1px solid rgb(0, 0, 0); */
+
+    z-index: 51;
+}
+
+
+.split .left .cardBody .circleChart {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 100%;
+    height: 100%;
+}
