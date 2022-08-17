@@ -91,6 +91,7 @@ function RadialProgressManager(parentId, id, size,  barSize, barColor, backgroun
 
 
 const createProgress = () => {
+    let time;
     document.getElementById("confirm").addEventListener('click', function () {
         document.getElementsByClassName("modalWrap")[0].classList.remove("none");
 
@@ -100,11 +101,20 @@ const createProgress = () => {
         var progress2 = new RadialProgressManager("circleChart", 'B', 130, 10, '#48A7BD', '#FFF', '65');
         var progress3 = new RadialProgressManager("circleChart", 'C', 80, 10, '#A66EF5', '#FFF', '70');
 
-        setTimeout(function() {
-            progress.setProgress(60, 0.5, "A");
-            progress2.setProgress(80, 0.5, "B");
-            progress3.setProgress(90, 0.5, "C");
+        time = setTimeout(function() {
+            progress.setProgress(20, 0.5, "A");
+            progress2.setProgress(40, 0.5, "B");
+            progress3.setProgress(50, 0.5, "C");
         }, 1000);
+    });
+
+    document.getElementById("modalWrap").addEventListener('click', function () {
+        clearTimeout(time);
+        document.getElementsByClassName("modalWrap")[0].classList.add("none");
+        let chart = document.getElementById("circleChart");
+        while (chart.hasChildNodes()) {
+            chart.removeChild(chart.firstChild);
+        }
     });
 }
 
