@@ -1,7 +1,8 @@
+@import url('https://rsms.me/inter/inter.css');
+
 /* 지울예정 */
 .pop-btn{
     display:inline-flex;
-    margin-top:5%;
     width:50%;
     height:100%;
     float:left;
@@ -125,10 +126,10 @@
 }
 
 /* 차트부분 */
-.split .left .cardLabel {
+.chartLabel {
     /* position: inherit; */
 
-    margin-left: 15px;
+    margin-left: 30px;
     margin-top: 15px;
 
     width: 88%;
@@ -141,7 +142,7 @@
     z-index: 510;
 }
 
-.split .left .cardBody {
+.chartBody {
     /* position: inherit; */
     margin-left: 15px;
 
@@ -152,7 +153,7 @@
     z-index: 510;
 }
 
-.split .left .cardFooter {
+.chartFooter {
     /* position: inherit; */
     margin-left: 15px;
 
@@ -165,13 +166,86 @@
 }
 
 
-.split .left .cardBody .circleChart {
+.chartBody .circleChart {
     margin-top: 10px;
     margin-left: 10px;
     width: 100%;
     height: 100%;
 }
 
+
+/* 리포트 */
+.reportLabel {
+    margin-left: 30px;
+    margin-top: 15px;
+    width: 88%;
+    height: 8%;
+    font-family: 'Inter';
+    color:#6F6F6F;
+    z-index: 510;
+}
+
+.reportBody {
+    margin-left: 30px;
+    width: 88%;
+    height: 88%;
+    z-index: 510;
+}
+
+.reportBody .reportList{
+    position: relative;
+    width: 88%;
+    height: 33%;
+}
+
+.reportList .reportIcon{
+    position: absolute;
+    margin-top: 15px;
+    right:auto;
+    left:auto;
+    width: 50px;
+    height: 50px;
+    background: #FFDDDD;
+    border-radius: 10px;
+}
+
+.reportList .reportText{
+    position: absolute;
+    margin-top: 14px;
+    margin-left: 10px;
+    left: 16%;
+    width: 70%;
+    height: 80%;
+}
+
+.reportList .reportText .reportHeader{
+    position: relative;
+    width: 100%;
+    height: 20%;
+    margin-top: -1px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 7px;
+    color: #6F6F6F;
+}
+
+.reportList .reportText .reportPercent{
+    position: relative;
+    margin-left: 5px;
+    margin-top: 1px;
+    width: 100%;
+    height: 80%;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 30px;
+
+    color: #4367E7;
+}
 
 
 
