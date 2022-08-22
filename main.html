@@ -84,15 +84,19 @@
           <div class="resultModal" id="resultModal">
               <div class="split">
                   <div class="left">
+
+                    <!-- 차트부분 -->
+
+                      <!-- 헤더 -->
                       <div class="chartLabel">Average Speed</div>
+                      
+                      <!-- 바디 -->
                       <div class="chartBody">
                           <div class="circleChart" id="circleChart">
-
-
-                            
                           </div>
-                          
                       </div>
+
+                      <!-- 푸터 -->
                       <div class="chartFooter">
                         <div class="chartLabel">
                           <div class="chartPoint red"></div>
@@ -109,44 +113,52 @@
                           <div class="chartText">정확도</div>
                           <span class="tooltip-text">61%</span> 
                         </div>
-
                       </div>
 
-                      
+                      <!-- 차트부분 끝 -->
+
                   </div>
                   <div class="right">
+
+                    <!-- 리포트 부분 -->
+
+                    <!-- 헤더 -->
                     <div class="reportLabel">Report</div>
-                      <div class="reportBody">
-                          <div class="reportList">
-                            <div class="reportIcon red">
-                              <object class="icon" data="./img/icon/firecracker.svg" type="image/svg+xml" id="firecracker"></object>
-                            </div>
-                            <div class="reportText">
-                              <div class="reportHeader">최고타수</div>
-                              <div class="reportPercent">453</div>
-                            </div>
-                          </div>
 
-                          <div class="reportList">
-                            <div class="reportIcon blue">
-                              <object class="icon" data="./img/icon/crown.svg" type="image/svg+xml" id="crown"></object>
-                            </div>
-                            <div class="reportText">
-                              <div class="reportHeader">평균타수</div>
-                              <div class="reportPercent">345</div>
-                            </div>
+                    <!-- 바디 -->
+                    <div class="reportBody">
+                        <div class="reportList">
+                          <div class="reportIcon red">
+                            <object class="icon" data="./img/icon/firecracker.svg" type="image/svg+xml" id="firecracker"></object>
                           </div>
+                          <div class="reportText">
+                            <div class="reportHeader">최고타수</div>
+                            <div class="reportNumber" id="resultNumber">453</div>
+                          </div>
+                        </div>
 
-                          <div class="reportList">
-                            <div class="reportIcon purple">
-                              <object class="icon" data="./img/icon/trophy.svg" type="image/svg+xml" id="trophy"></object>
-                            </div>
-                            <div class="reportText">
-                              <div class="reportHeader">정확도</div>
-                              <div class="reportPercent">100%</div>
-                            </div>
+                        <div class="reportList">
+                          <div class="reportIcon blue">
+                            <object class="icon" data="./img/icon/crown.svg" type="image/svg+xml" id="crown"></object>
                           </div>
-                      </div>
+                          <div class="reportText">
+                            <div class="reportHeader">평균타수</div>
+                            <div class="reportNumber" id="resultNumber">345</div>
+                          </div>
+                        </div>
+
+                        <div class="reportList">
+                          <div class="reportIcon purple">
+                            <object class="icon" data="./img/icon/trophy.svg" type="image/svg+xml" id="trophy"></object>
+                          </div>
+                          <div class="reportText">
+                            <div class="reportHeader">정확도</div>
+                            <div class="reportNumber" id="resultNumber">100%</div>
+                          </div>
+                        </div>
+                    </div>
+
+                    <!-- 리포트 부분 끝-->
                   </div>
               </div>
               <div class="resultModalTopBar"></div>
