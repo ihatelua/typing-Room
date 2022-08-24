@@ -1,4 +1,4 @@
-# 미니멀을 추구한 타이핑게임
+# 진부한 타이핑연습에 미니멀을 추구하다!
 
 ![캡처](/md_assets/mainScreenShot.png)
 
