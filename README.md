@@ -85,16 +85,19 @@ Utils 디렉토리
 
 ```
 
-`Admin` : main.html 에서 처음 import 되며 모든 모듈관리
-	`NormalManager` : 노말 맵 생성 및 모듈관리
-	`TypingManager` : Typing 부분 모듈관리
-		`TypingCreate` : Typing Template 생성 모듈
-		`TypingWave` : wave 생성 및 wave 데이터 세팅 모듈
-		`VowerUtil` : Typing 문장 완료시 체크 모듈(초성,중성,종성)
+**`Admin`**  <br>
+main.html 에서 처음 import 되며 모든 모듈관리
+> `NormalManager` : 노말 맵 생성 및 모듈관리 <br><br>
+> `TypingManager` : Typing 부분 모듈관리
+> > `TypingCreate` : Typing Template 생성 모듈 <br>
+> > `TypingWave` : wave 생성 및 wave 데이터 세팅 모듈 <br>
+> > `VowerUtil` : Typing 문장 완료시 체크 모듈(초성,중성,종성)<br>
 
-Utils 디렉토리
-	`constants` : 변수를 모아놓은 모듈
-	`templates` : 화면에 뿌려줄 템플릿을 모아놓은 모듈
-	`TypingMockData` : Typing 데이터를 모아놓은 모듈
-	`Request` : Get 파라미터 가져오는 모듈
+<br>
+
+**Utils 디렉토리** <br>
+> `constants` : 변수를 모아놓은 모듈 <br>
+> `templates` : 화면에 뿌려줄 템플릿을 모아놓은 모듈 <br>
+> `TypingMockData` : Typing 데이터를 모아놓은 모듈 <br>
+> `Request` : Get 파라미터 가져오는 모듈 <br>
 
