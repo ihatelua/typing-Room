@@ -85,8 +85,7 @@ Utils 디렉토리
 
 ```
 
-**`Admin`**  <br>
-main.html 에서 처음 import 되며 모든 모듈관리
+**`Admin`**  : main.html 에서 처음 import 되며 모든 모듈관리
 > `NormalManager` : 노말 맵 생성 및 모듈관리 <br><br>
 > `TypingManager` : Typing 부분 모듈관리
 > > `TypingCreate` : Typing Template 생성 모듈 <br>
