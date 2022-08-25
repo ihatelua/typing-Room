@@ -18,8 +18,9 @@ ___
 게이지가 100%가 되면 가운데 룸에서 가구가 배치됩니다.
 ___
 
-인덱스 페이지가 미개발이므로 테스트하려면 아래 링크처럼 접속. <br>
-http://localhost/main.html?map=normal 
+인덱스 페이지가 미개발되어있으므로 테스트하려면<br>
+ main.html 을 열어주고 링크에 ?map=normal 을 붙여주세요
+ex) http://localhost/main.html?map=normal 
 
 <br><br>
 
