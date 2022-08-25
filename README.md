@@ -44,41 +44,41 @@ JavaScript ES6의 export 키워드를 이용하여 모듈화를 구현하였습�
 > 모듈화 구조
 ```
 .
-└─ Admin
+└─ Admin.js
    │
-   ├── TypingManager  
-   │   ├── TypingWave
-   │   ├── TypingCreate
-   │   │   ├── Utils.TypingMockData
-   │   │   └── Utils.templates
+   ├── TypingManager.js  
+   │   ├── TypingWave.js
+   │   ├── TypingCreate.js
+   │   │   ├── Utils.TypingMockData.js
+   │   │   └── Utils.templates.js
    │   │
-   │   ├── VowerUtil 
-   │   │   └── Utils.constants
+   │   ├── VowerUtil.js 
+   │   │   └── Utils.constants.js
    │   │
-   │   └── Utils.constants
+   │   └── Utils.constants.js
    │
-   ├── NormalManager
-   │   ├── Utils.constants
-   │   └── Utils.templates
+   ├── NormalManager.js
+   │   ├── Utils.constants.js
+   │   └── Utils.templates.js
    │
-   └── Utils.Request
+   └── Utils.Request.js
 
 
 Utils 디렉토리
 │
-├─ constants 모듈
+├─ constants.js
 │   ├─ ... 
 │   └─ ...
 │   
-├─ templates 모듈
+├─ templates.js
 │   ├─ ... 
 │   ├─ ...
 │
-├─ TypingMockData 모듈
+├─ TypingMockData.js
 │   ├─ ... 
 │   └─ ...
 │
-└─ Request 모듈
+└─ Request.js
    ├─ ... 
    └─ ...
 
