@@ -125,23 +125,25 @@
     z-index: 500;
 }
 
-/* 차트부분 */
-.chartLabel {
-    /* position: inherit; */
-
+/* 카드 공통 */
+.cardHeader {
     margin-left: 30px;
     margin-top: 15px;
-
     width: 88%;
     height: 8%;
-    /* border: 1px solid rgb(0, 0, 0); */
-
     font-family: 'Inter';
     color:#6F6F6F;
-
     z-index: 510;
 }
 
+.cardBody {
+    margin-left: 30px;
+    width: 88%;
+    height: 88%;
+    z-index: 510;
+}
+
+/* 차트부분 */
 .chartBody {
     /* position: inherit; */
     margin-left: 15px;
@@ -231,24 +233,7 @@
 
 
 /* 리포트 */
-.reportLabel {
-    margin-left: 30px;
-    margin-top: 15px;
-    width: 88%;
-    height: 8%;
-    font-family: 'Inter';
-    color:#6F6F6F;
-    z-index: 510;
-}
-
-.reportBody {
-    margin-left: 30px;
-    width: 88%;
-    height: 88%;
-    z-index: 510;
-}
-
-.reportBody .reportList{
+.reportList{
     position: relative;
     width: 88%;
     height: 33%;
