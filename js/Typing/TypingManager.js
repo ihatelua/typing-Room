@@ -11,6 +11,7 @@ import VowerUtil from './VowerUtil.js';
 export default function TypingManager() {
     const inputTyping = document.getElementById("inputTyping"); // input
     const typingSpeed = document.getElementById("typingSpeed"); // 타수
+    const mainhead =  document.getElementById('mainhead');
     const wave = new Wave();
     let typingCreate = new TypingCreate();
     let vowerUtil = new VowerUtil();
@@ -34,6 +35,8 @@ export default function TypingManager() {
 
     // 타이핑 이벤트
     const onTypingHandler = event => {
+        inputCharCheck();   // 입력한 글자 체크
+
         if(inputTyping.value.length == 0){
             startTypingFlag = true;             // 시작할때 한 번 실행
             typingCreate.resetTypingTemp();     // 샘플데이터 리셋하기
@@ -155,10 +158,9 @@ export default function TypingManager() {
             for(let i = 0; i < typingValue.length; i++){
                 if(typingValue.length <= contents.length){
                     // 일치하지않는 문자가 빈값일때
-                    if(contents.charAt(i) == " " && typingValue.charAt(i) != " "){ 
+                    if(contents.charAt(i) == " " && typingValue.charAt(i) != " " && displayContents[i].className != "wrong"){ 
                         displayContents[i].innerHTML = "_"; 
                         displayContents[i].className = "wrong";
-                        missScore++;
                     }
                     
                     // 일치한 문자가 빈값일때
@@ -169,11 +171,12 @@ export default function TypingManager() {
 
                     if(contents.charAt(i) == typingValue.charAt(i)){   // 문자가 일치하면
                         displayContents[i].className = "correct";
-                    }else if(typingValue.length == i+1){               // 현재 타이핑중인 문자라면
+                    }
+                    else if(typingValue.length == i+1){               // 현재 타이핑중인 문자라면
                         displayContents[i].className = "normal";
-                    }else{      
+                    }
+                    else if(displayContents[i].className != "wrong"){      
                         displayContents[i].className = "wrong";
-                        missScore++;
                     }
 
                 }
@@ -218,6 +221,25 @@ export default function TypingManager() {
 
             resolve();
         });
+    }
+
+    /**
+     * 입력한 글자 체크 
+     * 흔들림이벤트, 감점
+     */
+    const inputCharCheck = () => {
+        const displayContents = document.querySelectorAll("#tempContents");
+        const contents = tempContent.contents;
+        const inputText = inputTyping.value;
+        if(vowerUtil.isCompareChar(contents.charAt(inputText.length-1), inputText.charAt(inputText.length-1))){
+            mainhead.classList.remove('shake');
+            mainhead.classList.add("shake")
+            setTimeout(function() {
+                mainhead.classList.remove('shake');
+            }, 50);
+            missScore++;
+            console.log(missScore)
+        }
     }
 
     const getCorrectContents = () => {
