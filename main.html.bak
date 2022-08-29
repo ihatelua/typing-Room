@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/percentWave.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="./css/game.css">
+    <link id="resultCss" rel="stylesheet" href="./css/resultModal.css">
+</head>
+
+<body>
+    <span class="pop-btn" id="confirm">모달열기</span>
+    
+
+
+    <div id="main">
+        <!-- 1단 -->
+        <div id="mainhead" class="mainhead">
+              <div class="gameBox" id="gameBox"> 
+               
+              </div>
+
+              <div class="box">
+                <div class="percent">
+                  <div class="percentNum" id="count">0</div>
+                  <div class="percentB">%</div>
+                </div>
+                <div id="water" class="water">
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" style="display: none;">
+                    <symbol id="wave">
+                      <path d="M420,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C514,6.5,518,4.7,528.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H420z"></path>
+                      <path d="M420,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C326,6.5,322,4.7,311.5,2.7C304.3,1.4,293.6-0.1,280,0c0,0,0,0,0,0v20H420z"></path>
+                      <path d="M140,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C234,6.5,238,4.7,248.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H140z"></path>
+                      <path d="M140,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C46,6.5,42,4.7,31.5,2.7C24.3,1.4,13.6-0.1,0,0c0,0,0,0,0,0l0,20H140z"></path>
+                    </symbol>
+                  </svg>
+                  <svg viewBox="0 0 560 20" class="water_wave water_wave_back">
+                    <use xlink:href="#wave"></use>
+                  </svg>
+                  <svg viewBox="0 0 560 20" class="water_wave water_wave_front">
+                    <use xlink:href="#wave"></use>
+                  </svg>
+                </div>
+              </div>
+
+        </div>
+
+
+        <!-- 2단 -->
+        <div class="indicater">
+      
+            <div class="speed"><div class="indicate-box"><span class="indicate-assist">SPD: </span><span class="speed-display" style="color: gray;" id="typingSpeed">0</span></div></div>
+            <div class="accuracy"><div class="indicate-box"><span class="indicate-assist">ACC: </span><span class="accuracy-display" style="color: gray;" id="typingAcc">0</span></div></div>
+            <div class="count"><div class="indicate-box"><span class="indicate-assist">CNT: </span><span class="count-display" id="typingCount">0</span></div></div>
+
+        </div>
+
+        <div class="recodeBox"></div>
+        <div class="recode">
+          SPD: <span class="wpm-display" id="resultPrevSpeed">0</span> / ACC: <span class="acc-display" id="resultAcc">0</span> / MAX: <span class="max-display" id="resultMax">0</span>
+        </div>
+
+        <!-- 3단 -->
+        <ul class="handler-ul">
+            <br>
+            <!-- <li><p class="bytes">0</p></li> -->
+            <div class="TextSourceBox">- <span class="textSource" id="textSourceTemp">출처</span> -</div>
+            <!-- <div class="inspect-point"></div> -->
+
+            <!-- 실제로 문장 보여주는 곳 -->
+            <div class="temp" id="typingTemp"></div>
+
+            <input class="content" type="text" spellcheck="false" style="border:none" size="80" id="inputTyping" placeholder="위 문장을 타이핑 하세요." autofocus="">
+            <hr class="textLine" id="textline" style="border:solid 2px rgb(112, 112, 112); width:95%">
+        </ul>   
+    </div>
+
+    <!-- 모달 결과창 -->
+    <div class="modal-container">
+      <div class="modalWrap none" id="modalWrap">
+          <div class="resultModal" id="resultModal">
+              <div class="split">
+                  <div class="left">
+
+                    <!-- 차트부분 -->
+
+                      <!-- 헤더 -->
+                      <div class="chartLabel">Average Speed</div>
+                      
+                      <!-- 바디 -->
+                      <div class="chartBody">
+                          <div class="circleChart" id="circleChart">
+                          </div>
+                      </div>
+
+                      <!-- 푸터 -->
+                      <div class="chartFooter">
+                        <div class="chartLabel">
+                          <div class="chartPoint red"></div>
+                          <div class="chartText">최고타수</div>
+                          <span class="tooltip-text">21%</span> 
+                        </div>
+                        <div class="chartLabel">
+                          <div class="chartPoint blue"></div>
+                          <div class="chartText">평균타수</div>
+                          <span class="tooltip-text">41%</span> 
+                        </div>
+                        <div class="chartLabel">
+                          <div class="chartPoint purple"></div>
+                          <div class="chartText">정확도</div>
+                          <span class="tooltip-text">61%</span> 
+                        </div>
+                      </div>
+
+                      <!-- 차트부분 끝 -->
+
+                  </div>
+                  <div class="right">
+
+                    <!-- 리포트 부분 -->
+
+                    <!-- 헤더 -->
+                    <div class="reportLabel">Report</div>
+
+                    <!-- 바디 -->
+                    <div class="reportBody">
+                        <div class="reportList">
+                          <div class="reportIcon red">
+                            <object class="icon" data="./img/icon/firecracker.svg" type="image/svg+xml" id="firecracker"></object>
+                          </div>
+                          <div class="reportText">
+                            <div class="reportHeader">최고타수</div>
+                            <div class="reportNumber" id="resultNumber">453</div>
+                          </div>
+                        </div>
+
+                        <div class="reportList">
+                          <div class="reportIcon blue">
+                            <object class="icon" data="./img/icon/crown.svg" type="image/svg+xml" id="crown"></object>
+                          </div>
+                          <div class="reportText">
+                            <div class="reportHeader">평균타수</div>
+                            <div class="reportNumber" id="resultNumber">345</div>
+                          </div>
+                        </div>
+
+                        <div class="reportList">
+                          <div class="reportIcon purple">
+                            <object class="icon" data="./img/icon/trophy.svg" type="image/svg+xml" id="trophy"></object>
+                          </div>
+                          <div class="reportText">
+                            <div class="reportHeader">정확도</div>
+                            <div class="reportNumber" id="resultNumber">100%</div>
+                          </div>
+                        </div>
+                    </div>
+
+                    <!-- 리포트 부분 끝-->
+                  </div>
+              </div>
+              <div class="resultModalTopBar"></div>
+              <div class="resultModalMiddleBar"></div>
+              <div class="resultModalFooterBar"></div>
+              
+          </div>
+      </div>
+  </div>
+</body>
+<script src="./js/admin/Admin.js" type="module"></script>   
+</html>
