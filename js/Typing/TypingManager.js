@@ -35,7 +35,7 @@ export default function TypingManager() {
 
     // 타이핑 이벤트
     const onTypingHandler = event => {
-        inputCharCheck();   // 입력한 글자 체크
+        typingEventCheck();   // 입력한 글자 체크
 
         if(inputTyping.value.length == 0){
             startTypingFlag = true;             // 시작할때 한 번 실행
@@ -126,14 +126,14 @@ export default function TypingManager() {
         // 실시간 타이핑 체크
         setInterval(() => {
             const typingValue = inputTyping.value;
-            return liveTypingCheck(typingValue);
+            liveGrammarCheck(typingValue);
         }, 60);
 
         // 실시간 타수 체크
         setInterval(() => {
             let passData = getCorrectContents();
-            return liveTypingSpeed(passData);
-        }, 100);
+            liveTypingSpeed(passData);
+        }, 150);
     }
     
     /**
@@ -146,55 +146,51 @@ export default function TypingManager() {
 
     /**
      * 
-     * 실시간 타이핑 체크
+     * 실시간 타이핑 문장 체크
      * 감점계산과 스타일을 변경한다.
      * @param {타이핑한 모든 문자열} typingValue 
      * @returns 
      */
-    const liveTypingCheck = async(typingValue) => {
-        return new Promise((resolve, reject) => {
-            const displayContents = document.querySelectorAll("#tempContents");
-            const contents = tempContent.contents;
-            for(let i = 0; i < typingValue.length; i++){
-                if(typingValue.length <= contents.length){
-                    // 일치하지않는 문자가 빈값일때
-                    if(contents.charAt(i) == " " && typingValue.charAt(i) != " " && displayContents[i].className != "wrong"){ 
-                        displayContents[i].innerHTML = "_"; 
-                        displayContents[i].className = "wrong";
-                    }
-                    
-                    // 일치한 문자가 빈값일때
-                    if(contents.charAt(i) == " " && typingValue.charAt(i) == " "){ 
-                        displayContents[i].innerHTML = " "; 
-                        displayContents[i].className = "correct";
-                    }
-
-                    if(contents.charAt(i) == typingValue.charAt(i)){   // 문자가 일치하면
-                        displayContents[i].className = "correct";
-                    }
-                    else if(typingValue.length == i+1){               // 현재 타이핑중인 문자라면
-                        displayContents[i].className = "normal";
-                    }
-                    else if(displayContents[i].className != "wrong"){      
-                        displayContents[i].className = "wrong";
-                    }
-
+    const liveGrammarCheck = async(typingValue) => {
+        const displayContents = document.querySelectorAll("#tempContents");
+        const contents = tempContent.contents;
+        for(let i = 0; i < typingValue.length; i++){
+            if(typingValue.length <= contents.length){
+                // 일치하지않는 문자가 빈값일때
+                if(contents.charAt(i) == " " && typingValue.charAt(i) != " " && displayContents[i].className != "wrong"){ 
+                    displayContents[i].innerHTML = "_"; 
+                    displayContents[i].className = "wrong";
                 }
-            }
+                
+                // 일치한 문자가 빈값일때
+                if(contents.charAt(i) == " " && typingValue.charAt(i) == " "){ 
+                    displayContents[i].innerHTML = " "; 
+                    displayContents[i].className = "correct";
+                }
 
-            // 타이핑한 문자열보다 샘플데이터 길이가 클 때
-            // 스타일을 지운다.
-            for(let i=0;i<contents.length;i++){
-                if(typingValue.length <= i){
+                if(contents.charAt(i) == typingValue.charAt(i)){   // 문자가 일치하면
+                    displayContents[i].className = "correct";
+                }
+                else if(typingValue.length == i+1){               // 현재 타이핑중인 문자라면
                     displayContents[i].className = "normal";
-                    if(displayContents[i].innerHTML == "_"){
-                        displayContents[i].innerHTML = " "
-                    }
+                }
+                else if(displayContents[i].className != "wrong"){      
+                    displayContents[i].className = "wrong";
+                }
+
+            }
+        }
+
+        // 타이핑한 문자열보다 샘플데이터 길이가 클 때
+        // 스타일을 지운다.
+        for(let i=0;i<contents.length;i++){
+            if(typingValue.length <= i){
+                displayContents[i].className = "normal";
+                if(displayContents[i].innerHTML == "_"){
+                    displayContents[i].innerHTML = " "
                 }
             }
-
-            resolve();
-        });
+        }
     }
 
     /**
@@ -204,30 +200,26 @@ export default function TypingManager() {
      * @returns 
      */
     const liveTypingSpeed = (correctValue) => {
-        return new Promise((resolve, reject) => {
-            let typingCount = vowerUtil.getConstantVowelCount(correctValue);
+        let typingCount = vowerUtil.getConstantVowelCount(correctValue);
 
-            let endTime = new Date();
-            let resultTime = (endTime.getTime() - startTime.getTime()) / 1000;
-            let resultSpeed = parseInt(typingCount * 60 / resultTime) - missScore;
-            
-            missScore = 0;
+        let endTime = new Date();   // 종료시간 가져오기
+        let resultTime = (endTime.getTime() - startTime.getTime()) / 1000; // 분당시간 
+        let resultSpeed = parseInt((typingCount - missScore) / (resultTime / 60)); // 입력한 글자 - 틀린글자 / 분당시간
+        
+        missScore = 0;
 
-            if(resultSpeed < 0){
-                typingSpeed.innerHTML = 0;
-            }else{
-                typingSpeed.innerHTML = resultSpeed;
-            }
-
-            resolve();
-        });
+        if(resultSpeed < 0){
+            typingSpeed.innerHTML = 0;
+        }else{
+            typingSpeed.innerHTML = resultSpeed;
+        }
     }
 
     /**
      * 입력한 글자 체크 
      * 흔들림이벤트, 감점
      */
-    const inputCharCheck = () => {
+    const typingEventCheck = () => {
         const displayContents = document.querySelectorAll("#tempContents");
         const contents = tempContent.contents;
         const inputText = inputTyping.value;
