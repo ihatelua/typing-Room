@@ -37,7 +37,9 @@ export default function VowerUtil() {
                 }
     
                 // 종성 계산
-                if(LAST[l] != ""){
+                if(SPECIAL.indexOf(LAST[l]) != -1){ // 특별한 문자라면 'ㅙ, ㅢ, ㄶ, ㅄ ... '
+                    size += 2;
+                }else{
                     size += 1;
                 }
             }else{
