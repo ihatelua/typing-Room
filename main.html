@@ -81,93 +81,121 @@
     <!-- 모달 결과창 -->
     <div class="modal-container">
       <div class="modalWrap none" id="modalWrap">
+
           <div class="resultModal" id="resultModal">
-              <div class="split">
-                  <div class="left">
-
-                    <!-- 차트부분 -->
-
-                      <!-- 헤더 -->
-                      <div class="cardHeader">Average Speed</div>
-                      
-                      <!-- 바디 -->
-                      <div class="chartBody">
-                          <div class="circleChart" id="circleChart">
-                          </div>
-                      </div>
-
-                      <!-- 푸터 -->
-                      <div class="chartFooter">
-                        <div class="chartLabel">
-                          <div class="chartPoint red"></div>
-                          <div class="chartText">최고타수</div>
-                          <span class="tooltip-text">21%</span> 
-                        </div>
-                        <div class="chartLabel">
-                          <div class="chartPoint blue"></div>
-                          <div class="chartText">평균타수</div>
-                          <span class="tooltip-text">41%</span> 
-                        </div>
-                        <div class="chartLabel">
-                          <div class="chartPoint purple"></div>
-                          <div class="chartText">정확도</div>
-                          <span class="tooltip-text">61%</span> 
-                        </div>
-                      </div>
-
-                      <!-- 차트부분 끝 -->
-
+            <!-- 모달 타이틀-->
+            <div class="resultTitle">
+              <div class="titleHeader">
+                <div class="titleHeaderLine">
+                  <div class="titleHeaderIcon">
+                    <object class="icon" data="./img/icon/congratulate.svg" type="image/svg+xml" id="firecracker"></object>
                   </div>
-                  <div class="right">
+                  <div class="titleHeaderText">
+                    Congratulations!!
+                  </div>
+                  </div>
+              </div>
+              <div class="titleBodyDate">
+                2022-08-16
+              </div>
+              <div class="titleBodyText">
+                결과리포트
+              </div>
+            </div>
+            <!-- 모달 타이틀 끝-->
 
-                    <!-- 리포트 부분 -->
+            <!-- 모달 룸 이미지 -->
+            <div class="resultTitleRoom">
+              <img class="resultTitleRoomImg" src="./img/normal/level1.png">
+            </div>
+            <!-- 모달 룸 이미지 끝 -->
 
+            <!-- 상세 모달 -->
+            <div class="detailResult">
+                <!-- 차트부분 -->
+                <div class="left">
                     <!-- 헤더 -->
-                    <div class="cardHeader">Report</div>
-
+                    <div class="cardHeader">Average Speed</div>
+                    
                     <!-- 바디 -->
-                    <div class="cardBody">
-                        <div class="reportList">
-                          <div class="reportIcon red">
-                            <object class="icon" data="./img/icon/firecracker.svg" type="image/svg+xml" id="firecracker"></object>
-                          </div>
-                          <div class="reportText">
-                            <div class="reportHeader">최고타수</div>
-                            <div class="reportNumber" id="resultNumber">453</div>
-                          </div>
-                        </div>
-
-                        <div class="reportList">
-                          <div class="reportIcon blue">
-                            <object class="icon" data="./img/icon/crown.svg" type="image/svg+xml" id="crown"></object>
-                          </div>
-                          <div class="reportText">
-                            <div class="reportHeader">평균타수</div>
-                            <div class="reportNumber" id="resultNumber">345</div>
-                          </div>
-                        </div>
-
-                        <div class="reportList">
-                          <div class="reportIcon purple">
-                            <object class="icon" data="./img/icon/trophy.svg" type="image/svg+xml" id="trophy"></object>
-                          </div>
-                          <div class="reportText">
-                            <div class="reportHeader">정확도</div>
-                            <div class="reportNumber" id="resultNumber">100%</div>
-                          </div>
+                    <div class="chartBody">
+                        <div class="circleChart" id="circleChart">
                         </div>
                     </div>
 
-                    <!-- 리포트 부분 끝-->
+                    <!-- 푸터 -->
+                    <div class="chartFooter">
+                      <div class="chartLabel">
+                        <div class="chartPoint red"></div>
+                        <div class="chartText">최고타수</div>
+                        <span class="tooltip-text">21%</span> 
+                      </div>
+                      <div class="chartLabel">
+                        <div class="chartPoint blue"></div>
+                        <div class="chartText">평균타수</div>
+                        <span class="tooltip-text">41%</span> 
+                      </div>
+                      <div class="chartLabel">
+                        <div class="chartPoint purple"></div>
+                        <div class="chartText">정확도</div>
+                        <span class="tooltip-text">61%</span> 
+                      </div>
+                    </div>
+                </div>
+                 <!-- 차트부분 끝 -->
+
+                <!-- 리포트 부분 -->
+                <div class="right">
+                  <!-- 헤더 -->
+                  <div class="cardHeader">Report</div>
+
+                  <!-- 바디 -->
+                  <div class="cardBody">
+                      <div class="reportList">
+                        <div class="reportIcon red">
+                          <object class="icon" data="./img/icon/firecracker.svg" type="image/svg+xml" id="firecracker"></object>
+                        </div>
+                        <div class="reportText">
+                          <div class="reportHeader">최고타수</div>
+                          <div class="reportNumber" id="resultNumber">453</div>
+                        </div>
+                      </div>
+
+                      <div class="reportList">
+                        <div class="reportIcon blue">
+                          <object class="icon" data="./img/icon/crown.svg" type="image/svg+xml" id="crown"></object>
+                        </div>
+                        <div class="reportText">
+                          <div class="reportHeader">평균타수</div>
+                          <div class="reportNumber" id="resultNumber">345</div>
+                        </div>
+                      </div>
+
+                      <div class="reportList">
+                        <div class="reportIcon purple">
+                          <object class="icon" data="./img/icon/trophy.svg" type="image/svg+xml" id="trophy"></object>
+                        </div>
+                        <div class="reportText">
+                          <div class="reportHeader">정확도</div>
+                          <div class="reportNumber" id="resultNumber">100%</div>
+                        </div>
+                      </div>
                   </div>
-              </div>
-              <div class="resultModalTopBar"></div>
-              <div class="resultModalMiddleBar"></div>
-              <div class="resultModalFooterBar"></div>
+                </div>
+                <!-- 리포트 부분 끝-->
+            </div>
+            <!-- 상세 모달 끝-->
+
+            <!-- 모달 베이스 -->
+            <div class="resultModalTopBar"></div>
+            <div class="resultModalMiddleBar"></div>
+            <div class="resultModalFooterBar"></div>
+            <!-- 모달 베이스 끝-->
               
           </div>
       </div>
   </div>
+  <!-- 모달 결과창 끝 -->
 </body>
 <script src="./js/admin/Admin.js" type="module"></script>
 <script src="RadialProgressManager.js" type="module"></script>   

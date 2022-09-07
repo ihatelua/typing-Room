@@ -25,7 +25,7 @@ export const initTypingTemp = (data) => {
  * @returns 
  */
 const createNormalRoom = level => {
-    return `<object class="room" data="./img/normal/level${level}.svg" type="image/svg+xml" id="room"></object>`
+    return `<object class="room" data="./img/normal/level${level}.svg" type="image/svg+xml" id="room"> </object>`
 }
 
 /**

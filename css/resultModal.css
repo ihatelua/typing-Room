@@ -36,6 +36,7 @@
     animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
+/******************** 모달 베이스 ***********************/
 .resultModal{
     position: fixed;
     display: block;
@@ -81,9 +82,90 @@
     border-radius: 40px;
     z-index: 100
 }
+/******************** 모달 베이스 끝 ***********************/
 
-/* 하단 결과값*/
-.split {
+/******************** 모달 타이틀 ********************/
+.resultTitle {
+    position: absolute;
+    top: 0%;
+    width: 50%;
+    height: 45%;
+    z-index: 400;
+    padding-top: 12px;
+    padding-left: 30px;
+}
+
+.resultTitleRoom {
+    position: inherit;
+    left: 54%;
+    width: 39%;
+    height: 43%;
+    z-index: 400;
+    padding: 12px 30px 12px 30px;
+}
+
+.resultTitleRoomImg {
+    position: inherit;
+    width: 72%;
+    top: -23%;
+    left: 47%;
+}
+
+.titleHeader {
+    position: relative;
+    width: 100%;
+    height: 20%;
+    color:#ffffff
+}
+
+.titleHeaderLine {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.titleHeaderIcon{
+    position: inherit;
+    top: 14%;
+    width: 9%;
+}
+
+.titleHeaderText{
+    position: inherit;
+    left: 11%;
+    width: 100%;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.titleBodyDate {
+    position: relative;
+    top: 25%;
+    left: 2%;
+    width: 100%;
+    height: 20%;
+    font-size: 21px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.titleBodyText {
+    position: relative;
+    top : 16%;
+    width: 100%;
+    height: 32%;
+    font-size: 55px;
+    font-weight: bold;
+    color:#ffffff
+}
+
+
+
+
+/******************** 모달 타이틀 끝 ********************/
+
+/******************** 모달 디테일 ********************/
+.detailResult {
     position: absolute;
 
     top: 48%;
@@ -94,7 +176,7 @@
     z-index: 400;
 }
 
-.split .left {
+.detailResult .left {
     position: inherit;
     margin-left: 20px;
     margin-top: 20px;
@@ -109,7 +191,7 @@
     z-index: 500;
 }
 
-.split .right {
+.detailResult .right {
     position: inherit;
     margin-left: 10px;
     margin-top: 20px;
@@ -125,7 +207,7 @@
     z-index: 500;
 }
 
-/* 카드 공통 */
+/******** 카드 공통 ***********/
 .cardHeader {
     margin-left: 30px;
     margin-top: 15px;
@@ -142,8 +224,9 @@
     height: 88%;
     z-index: 510;
 }
+/******** 카드 공통 끝 ***********/
 
-/* 차트부분 */
+/*********** 차트부분 ***********/
 .chartBody {
     /* position: inherit; */
     margin-left: 15px;
@@ -230,9 +313,10 @@
     width: 100%;
     height: 100%;
 }
+/*********** 차트부분 끝 ***********/
 
 
-/* 리포트 */
+/******* 리포트 *******/
 .reportList{
     position: relative;
     width: 88%;
@@ -260,8 +344,6 @@
 .reportIcon.purple{
     background: #BFA8FF;
 }
-
-
 
 .reportList .reportIcon .icon {
     position: initial;
@@ -309,12 +391,14 @@
 
     color: #4367E7;
 }
+/******* 리포트 끝 *******/
+
+/******************** 모달 디테일 끝 ********************/
 
 
 
 
-
-
+/******************** 모달 이벤트 ********************/
 
 #modal-container.six .modal-background .modal {
     background-color: transparent;
@@ -354,7 +438,9 @@
     animation: quickScaleDown 0s 0.5s linear forwards;
 }
 
+/******************** 모달 이벤트 끝 ********************/
 
+/******************** 모달 키프레임 ********************/
 @keyframes sketchIn {
     0% {
         stroke-dashoffset: 778;
@@ -380,3 +466,6 @@
         background: rgba(0, 0, 0, .7);
    }
 }
+
+/******************** 모달 키프레임 끝********************/
+
