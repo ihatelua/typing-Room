@@ -44,7 +44,123 @@ const createNormalRoom = level => {
 }
 
 /**
- * 결과창모달 스타일 템플릿
+ * 결과창모달 베이스 템플릿
+ * @param {titleDate, roomSrc, maxSpeed, avgSpeed, accPercent} json
+ */
+const createResultModalBase = (json) => {
+    return `
+    <div class="modalWrap none" id="modalWrap">
+
+        <div class="resultModal" id="resultModal">
+        <!-- 모달 타이틀-->
+        <div class="resultTitle">
+            <div class="titleHeader">
+            <div class="titleHeaderLine">
+                <div class="titleHeaderIcon">
+                <object class="icon" data="./img/icon/congratulate.svg" type="image/svg+xml" id="firecracker"></object>
+                </div>
+                <div class="titleHeaderText">
+                    Congratulations!!
+                </div>
+                </div>
+            </div>
+            <div class="titleBodyDate" id="modal-titleBodyDate">
+                ${json.titleDate}
+            </div>
+            <div class="titleBodyText">
+            결과리포트
+            </div>
+        </div>
+        <!-- 모달 타이틀 끝-->
+
+        <!-- 모달 룸 이미지 -->
+        <div class="resultTitleRoom">
+            <img class="resultTitleRoomImg" src="${json.roomSrc}">
+        </div>
+        <!-- 모달 룸 이미지 끝 -->
+
+        <!-- 상세 모달 -->
+        <div class="detailResult">
+            <!-- 차트부분 -->
+            <div class="left">
+                <!-- 헤더 -->
+                <div class="cardHeader">Average Speed</div>
+                
+                <!-- 바디 -->
+                <div class="chartBody">
+                    <div class="circleChart" id="circleChart">
+                    </div>
+                </div>
+
+                <!-- 푸터 -->
+                <div class="chartFooter" id="chartFooter"></div>
+            </div>
+            <!-- 차트부분 끝 -->
+
+            <!-- 리포트 부분 -->
+            <div class="right">
+                <!-- 헤더 -->
+                <div class="cardHeader">Report</div>
+
+                <!-- 바디 -->
+                <div class="cardBody">
+                    <div class="reportList">
+                    <div class="reportIcon red">
+                        <object class="icon" data="./img/icon/firecracker.svg" type="image/svg+xml" id="firecracker"></object>
+                    </div>
+                    <div class="reportText">
+                        <div class="reportHeader">최고타수</div>
+                        <div class="reportNumber" id="resultNumber">${json.maxSpeed}</div>
+                    </div>
+                    </div>
+
+                    <div class="reportList">
+                    <div class="reportIcon blue">
+                        <object class="icon" data="./img/icon/crown.svg" type="image/svg+xml" id="crown"></object>
+                    </div>
+                    <div class="reportText">
+                        <div class="reportHeader">평균타수</div>
+                        <div class="reportNumber" id="resultNumber">${json.avgSpeed}</div>
+                    </div>
+                    </div>
+
+                    <div class="reportList">
+                    <div class="reportIcon purple">
+                        <object class="icon" data="./img/icon/trophy.svg" type="image/svg+xml" id="trophy"></object>
+                    </div>
+                    <div class="reportText">
+                        <div class="reportHeader">정확도</div>
+                        <div class="reportNumber" id="resultNumber">${json.accPercent}</div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 리포트 부분 끝-->
+        </div>
+        <!-- 상세 모달 끝-->
+
+        <!-- 모달 베이스 -->
+        <div class="resultModalTopBar"></div>
+        <div class="resultModalMiddleBar"></div>
+        <div class="resultModalFooterBar"></div>
+        <!-- 모달 베이스 끝-->
+            
+        </div>
+    </div>
+    
+    `;
+}
+
+/**
+ * 결과창모달 베이스를 세팅한다.
+ * @param {titleDate, roomSrc, maxSpeed, avgSpeed, accPercent} json
+ */
+export const initResultModalBaseTemp = (parentId, json) => {
+    document.getElementById(parentId).insertAdjacentHTML('beforeend', createResultModalBase(json));
+}
+
+/**
+ * 결과창모달 차트 스타일 템플릿
  * @param {원의 사이즈} size 
  * @param {className} id 
  * @param {바 사이즈} barSize 
@@ -59,7 +175,7 @@ const createResultModalStyle = (id, size, barSize, barColor, backgroundColor, zI
 }
 
 /**
- * 결과창모달 스타일을 세팅한다.
+ * 결과창모달 차트 스타일을 세팅한다.
  * @param {className} id 
  * @param {원의 사이즈} size 
  * @param {바 사이즈} barSize 
@@ -75,15 +191,15 @@ export const initResultModalStyleTemp = (id, size, barSize, barColor, background
 }
 
 /**
- * 결과창모달 템플릿
+ * 결과창모달 차트 템플릿
  * @param {className} id 
  */
-export const createResultModal = (id) => {
+const createResultModal = (id) => {
     return `<div class="radial-progress${id}"><div class="inner-circle${id}"></div><div class="outer-circle${id}"><div class="mask${id} full${id}"><div class="fill${id}"></div></div><div class="mask${id}"><div class="fill${id}"></div><div class="fill${id} fix${id}"></div></div></div></div>`
 }
 
 /**
- * 결과창모달을 세팅한다.
+ * 결과창모달을 차트 템플릿을 세팅한다.
  * @param {부모의 id} parentId 
  * @param {className} id 
  */
@@ -91,7 +207,31 @@ export const initResultModalTemp = (parentId, id) => {
     document.getElementById(parentId).insertAdjacentHTML('beforeend', createResultModal(id));
 }
 
+/**
+ * 결과창모달 푸터 범례 템플릿
+ */
+// red, blue, purple
+const createResultChartFooter = (legendColor, legendName, legendId, legendPercent) => {
+    return `<div class="chartLabel"><div class="chartPoint" style="background:${legendColor};"></div><div class="chartText">${legendName}</div><span class="tooltip-text" id="legend-${legendId}">${legendPercent}</span></div>`
+}
+
+/**
+ * 결과창모달 푸터 범례 템플릿을 세팅한다.
+ * @param {부모Id, {색깔, 범례이름, 차트id, 퍼센트}} parentId, json
+ */
+export const initResultChartFooterTemp = (parentId, json) => {
+    document.getElementById(parentId).insertAdjacentHTML('beforeend', createResultChartFooter(json.legendColor, json.legendName, json.legendId, json.legendPercent));
+}
 
 
-
+/**
+ * 노드를 삭제한다.
+ * @param { 노드 id } id
+ */
+export const deleteNode = (id) => {
+    let chart = document.getElementById(id);
+    while (chart.hasChildNodes()) {
+        chart.removeChild(chart.firstChild);
+    }
+}
 

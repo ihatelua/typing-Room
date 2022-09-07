@@ -1,11 +1,14 @@
 import Request from '../utils/Request.js';
 import TypingManager from '../Typing/TypingManager.js';     // 타이핑 모듈을 가져온다.
 import NormalManager from '../game/NormalManager.js';       // 노말맵 모듈을 가져온다.
+import resultModalManager from '../Typing/resultModalManager.js';
+
 
 function Admin() {
     const request = new Request();
     const percentCount = document.getElementById("count");  // wave 퍼센트 셀렉터
     const typingMain = new TypingManager();                 // 타이핑매니저 선언
+    const resultModal = new resultModalManager();           // 모달매니저 선언
     let manager;  
     let background;  
     

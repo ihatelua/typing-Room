@@ -1,4 +1,4 @@
-import {initResultModalStyleTemp, initResultModalTemp} from './js/utils/templates.js'                        // 샘플데이터를 세팅모듈을 가져온다.
+import {initResultModalStyleTemp, initResultModalTemp, initResultChartFooterTemp} from '../utils/templates.js'                  // 샘플데이터를 세팅모듈을 가져온다.
 
 /**
  * 원형차트 매니저
@@ -9,7 +9,7 @@ import {initResultModalStyleTemp, initResultModalTemp} from './js/utils/template
  * @param {백그라운드 색깔} backgroundColor 
  * @param {순서} zIndex 
  */
-function RadialProgressManager(parentId, id, size,  barSize, barColor, backgroundColor, zIndex)  {
+ export default function RadialProgressManager(parentId, id, size,  barSize, barColor, backgroundColor, zIndex)  {
     let progress = 0;
     let requestAnimationFrame = window.requestAnimationFrame ||
         window.mozRequestAnimationFrame ||
@@ -17,9 +17,10 @@ function RadialProgressManager(parentId, id, size,  barSize, barColor, backgroun
         window.oRequestAnimationFrame ||
         window.msRequestAnimationFrame;
 
-    // 선언과 동시에 템플릿을 생성시킨다.
+    // 선언과 동시에 차트 템플릿을 생성시킨다.
     initResultModalStyleTemp(id, size, barSize, barColor, backgroundColor, zIndex);
     initResultModalTemp(parentId, id);
+    
 
     // 원형차트 삭제
     const remove = () => {
@@ -49,7 +50,7 @@ function RadialProgressManager(parentId, id, size,  barSize, barColor, backgroun
     };
 
     // 퍼센트바 세팅
-    const setProgress = (percent, duration, id) => {
+    const setProgress = (percent, duration, id, name) => {
         let radialProgress = document.getElementsByClassName("radial-progress" + id)[0];
         percent = (percent > 100) ? 100 : percent;
         let $maskFull = radialProgress.getElementsByClassName('mask' + id + ' full' + id)[0];
@@ -73,11 +74,12 @@ function RadialProgressManager(parentId, id, size,  barSize, barColor, backgroun
                 requestAnimationFrame(step);
             }
 
-            // if (progress === 100) {
-            //     setTimeout(function() {
-                    // remove();   // 종료
-            //     }, 1000);
-            // }
+            if (progress === percent) {
+                // setTimeout(function() {
+                //     remove();   // 종료
+                // }, 1000);
+                initResultChartFooterTemp("chartFooter", {"legendColor" : barColor, "legendName": name, "legendId": id, "legendPercent": percent})
+            }
         }
 
         requestAnimationFrame(step);
@@ -88,34 +90,3 @@ function RadialProgressManager(parentId, id, size,  barSize, barColor, backgroun
         setProgress
     }
 };
-
-
-const createProgress = () => {
-    let time;
-    document.getElementById("confirm").addEventListener('click', function () {
-        document.getElementsByClassName("modalWrap")[0].classList.remove("none");
-
-
-        // 사이즈, id, 바 사이즈, 바 색깔, 백그라운드 색깔, z-index
-        var progress = new RadialProgressManager("circleChart", 'A', 180, 10, '#EB6540', '#FFF', '60');
-        var progress2 = new RadialProgressManager("circleChart", 'B', 130, 10, '#48A7BD', '#FFF', '65');
-        var progress3 = new RadialProgressManager("circleChart", 'C', 80, 10, '#A66EF5', '#FFF', '70');
-
-        time = setTimeout(function() {
-            progress.setProgress(20, 0.5, "A");
-            progress2.setProgress(40, 0.5, "B");
-            progress3.setProgress(50, 0.5, "C");
-        }, 1000);
-    });
-
-    document.getElementById("modalWrap").addEventListener('click', function () {
-        clearTimeout(time);
-        document.getElementsByClassName("modalWrap")[0].classList.add("none");
-        let chart = document.getElementById("circleChart");
-        while (chart.hasChildNodes()) {
-            chart.removeChild(chart.firstChild);
-        }
-    });
-}
-
-createProgress();
