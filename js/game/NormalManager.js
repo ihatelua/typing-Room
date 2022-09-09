@@ -7,7 +7,7 @@ export default function NormalManager() {
     let gameRoom = null;               // 룸 svg 요소
     let currentLevel = null;           // 현재 레벨
     let currentRound = null;           // 현재 라운드 오브젝트
-    let currentObjectCount = 0  // 현재 라운드 수
+    let currentObjectCount = 0         // 현재 라운드 수
     let backgroundColor = "";
 
     // 룸 세팅
@@ -41,6 +41,14 @@ export default function NormalManager() {
             object.remove();
             initRoomSetting({level: ++currentLevel, background: backgroundColor})
         }
+    }
+
+    const getCurrentLevel = () => {
+        return currentLevel;
+    }
+
+    const getCurrentObjectCount = () => {
+        return currentObjectCount;
     }
 
     // 레벨의 총 길이를 가져온다.
@@ -81,6 +89,8 @@ export default function NormalManager() {
 
     return {
         initRoomSetting,
-        nextRoomObject
+        nextRoomObject,
+        getCurrentLevel,
+        getCurrentObjectCount
     }
 }

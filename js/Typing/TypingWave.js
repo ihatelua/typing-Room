@@ -14,7 +14,7 @@ export default function Wave() {
     }
 
     // wave 퍼센트 추가
-    const addWave = (num) => {
+    const addWave = (num, resultData) => {
         if(currentPercent + num < 100){
             currentPercent += num;
             percentCount.innerHTML = currentPercent;
@@ -23,7 +23,7 @@ export default function Wave() {
             currentPercent = (currentPercent + num) - 100;
             percentCount.innerHTML = currentPercent;
             percentWater.style.transform = 'translate(0'+','+(100-(currentPercent))+'%)';
-            percentCount.dispatchEvent(new CustomEvent("pass", {}));    // 커스텀 이벤트 실행
+            percentCount.dispatchEvent(new CustomEvent("pass", {detail: resultData}));    // 커스텀 이벤트 실행
         }
     }
 

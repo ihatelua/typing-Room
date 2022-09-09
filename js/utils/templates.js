@@ -212,7 +212,7 @@ export const initResultModalTemp = (parentId, id) => {
  */
 // red, blue, purple
 const createResultChartFooter = (legendColor, legendName, legendId, legendPercent) => {
-    return `<div class="chartLabel"><div class="chartPoint" style="background:${legendColor};"></div><div class="chartText">${legendName}</div><span class="tooltip-text" id="legend-${legendId}">${legendPercent}</span></div>`
+    return `<div class="chartLabel"><div class="chartPoint" style="background:${legendColor};"></div><div class="chartText">${legendName}</div><span class="tooltip-text" id="legend-${legendId}">${legendPercent}%</span></div>`
 }
 
 /**

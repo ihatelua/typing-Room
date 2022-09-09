@@ -26,7 +26,9 @@ export default function TypingManager() {
         prevSpeed: 0,   // 최근타수
         maxSpeed: 0,    // 최고타수
         accuracy: 0,    // 정확도
-        count: 0        // 카운트
+        count: 0,        // 카운트
+        recordData: [],  // 타수기록
+        averageSpeed: 0
     }
 
     // 변수값 초기화
@@ -90,7 +92,17 @@ export default function TypingManager() {
             // 카운트 아카이브 저장
             archive.count++;
 
-            wave.addWave(successPoint); 
+            // 타수기록
+            archive.recordData.push(wordSpeed);
+
+            // 평균타수
+            let sumSpeed = 0;
+            archive.recordData.forEach((data) => {
+                sumSpeed += Number(data);
+            })
+            archive.averageSpeed = Math.floor(sumSpeed / archive.recordData.length);
+
+            wave.addWave(successPoint, archive); 
             setResultBox();     // 결과값 세팅
             restartGame();      // 게임 재시작
         }
