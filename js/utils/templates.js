@@ -195,7 +195,7 @@ export const initResultModalStyleTemp = (id, size, barSize, barColor, background
  * @param {className} id 
  */
 const createResultModal = (id) => {
-    return `<div class="radial-progress${id}"><div class="inner-circle${id}"></div><div class="outer-circle${id}"><div class="mask${id} full${id}"><div class="fill${id}"></div></div><div class="mask${id}"><div class="fill${id}"></div><div class="fill${id} fix${id}"></div></div></div></div>`
+    return `<div class="radial-progress${id}"><div class="inner-circle${id}"><div class="chartGrade" id="chartGrade"></div></div><div class="outer-circle${id}"><div class="mask${id} full${id}"><div class="fill${id}"></div></div><div class="mask${id}"><div class="fill${id}"></div><div class="fill${id} fix${id}"></div></div></div></div>`
 }
 
 /**

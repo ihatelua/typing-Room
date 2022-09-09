@@ -238,6 +238,26 @@
     z-index: 510;
 }
 
+.chartGrade {
+    position: initial;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    padding: 17px;
+    font-family: 'Inter';
+    font-weight: 900;
+    font-size: 36px;
+    color: #EC7646;
+    text-align: center;
+    line-height: 100%;
+    opacity: 0;
+}
+
+.chartGrade.fadeIn {
+    opacity: 1;
+    animation: fadeInLegend 2s;
+}
+
 .chartFooter {
     /* position: inherit; */
     margin-left: 15px;
