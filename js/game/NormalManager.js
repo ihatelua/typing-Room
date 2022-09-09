@@ -3,10 +3,10 @@ import {initGameRoomTemp} from '../utils/templates.js'  // 룸 데이터 세팅�
 
 export default function NormalManager() {
     const background = document.getElementById("mainhead");
-    let object;                 // 룸 요소
-    let gameRoom;               // 룸 svg 요소
-    let currentLevel;           // 현재 레벨
-    let currentRound;           // 현재 라운드 오브젝트
+    let object = null;                 // 룸 요소
+    let gameRoom = null;               // 룸 svg 요소
+    let currentLevel = null;           // 현재 레벨
+    let currentRound = null;           // 현재 라운드 오브젝트
     let currentObjectCount = 0  // 현재 라운드 수
     let backgroundColor = "";
 

@@ -9,8 +9,8 @@ function Admin() {
     const percentCount = document.getElementById("count");  // wave 퍼센트 셀렉터
     const typingMain = new TypingManager();                 // 타이핑매니저 선언
     const resultModal = new resultModalManager();           // 모달매니저 선언
-    let manager;  
-    let background;  
+    let manager = null;  
+    let background = null;  
     
     // 공통 세팅 변수
     const model = {
@@ -27,6 +27,7 @@ function Admin() {
         typingMain.init(model.successPoint);                            // 타이핑 세팅
         setManager(request.getParameter("map"))                         // 파라미터값에 따라 맵을 가져온다.
         manager.initRoomSetting({level: 1, background: background});    // 게임맵 세팅
+        resultModal.init();                                             // 결과창 모달 세팅
     }
 
     const setEvent = () => {
