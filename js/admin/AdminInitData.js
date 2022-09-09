@@ -1,6 +1,6 @@
 // 공통 세팅 변수
 export const  model = {
-    successPoint     : 100,      // 성공시 퍼센트 게이지
+    successPoint     : 45,      // 성공시 퍼센트 게이지
     normalBackground : "red",   // 노말맵 백그라운드
     currentMap : "",            // 현재맵
     currentLevel : 1
