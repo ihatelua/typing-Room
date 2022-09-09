@@ -1,9 +1,13 @@
 import RadialProgressManager from './RadialProgressManager.js';
 import {initResultModalBaseTemp} from '../utils/templates.js';
 
+/**
+ * 결과모달창 매니저
+ */
 export default function resultModalManager()  {
     let time = null;
 
+    // 결과모달창 베이스 데이터
     let baseModalData = {
         titleDate : ""
       , roomSrc : ""
@@ -12,6 +16,7 @@ export default function resultModalManager()  {
       , accPercent : ""
     }; 
 
+    // 결과모달창 차트 데이터
     let chartModalData = [{
         id: ""
       , size : ""
@@ -42,7 +47,7 @@ export default function resultModalManager()  {
     const setEvent = () => {
         // createChartEvent 함수를 실행해서 모달을 열도록 해야함
         // document.getElementById("confirm").addEventListener('click', this.createChartEvent); 
-        document.getElementById("modalWrap").addEventListener('click', this.restartModal);
+        document.getElementById("modalWrap").addEventListener('click', this.resetModal);
     }
 
     /**
@@ -74,9 +79,9 @@ export default function resultModalManager()  {
     }
 
     /**
-     * 모달 삭제 이벤트
+     * 모달 리셋
      */
-    this.restartModal = () => {
+    this.resetModal = () => {
         // 차트애니메이션 중지
         clearTimeout(time);
 
@@ -92,7 +97,7 @@ export default function resultModalManager()  {
         baseModalData = data;
     }
 
-    const setChartModalData = (data) => {
+    this.setChartModalData = (data) => {
         chartModalData = data;
     }
 

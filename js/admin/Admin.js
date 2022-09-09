@@ -18,8 +18,10 @@ function Admin() {
     // 다음라운드
     // ./img/normal/level1.png
     const nextRound = (data) => {
-        debugger;
+        // 다음라운드
         manager.nextRoomObject();
+
+        // 만약 다음레벨로 넘어갔다면 모달창을 띄운다.
         if(model.currentLevel != manager.getCurrentLevel()){
             model.currentLevel = manager.getCurrentLevel();
             resultModal.setBaseModalData({
@@ -29,7 +31,7 @@ function Admin() {
                 , avgSpeed    : data.detail.averageSpeed
                 , accPercent  : data.detail.accuracy
             });
-            resultModal.restartModal();
+            resultModal.resetModal();
             resultModal.createChartEvent();
         }
         // dispatchEvent(new CustomEvent("pass", {}));
