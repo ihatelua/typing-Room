@@ -53,22 +53,23 @@ export default function TypingManager() {
         }
     
         if(event.code == KEY_TYPE.SPACE){
-            perfectTypingCheck();            // 문자열이 정확한지 확인
+            perfectTypingCheck(event.code);            // 문자열이 정확한지 확인
         }
     
         if(event.code == KEY_TYPE.ENTER){
-            perfectTypingCheck();               // 문자열이 정확한지 확인
+            debugger;
+            perfectTypingCheck(event.code);               // 문자열이 정확한지 확인
         }
     }
 
     /**
      * 타이핑이 완료됐을때 체크
      */
-    const perfectTypingCheck = () => {
+    const perfectTypingCheck = (key) => {
         let typingValue = inputTyping.value;
         let answer = tempContent.contents;
-
-        if(typingValue.length-1 == answer.length ){
+        
+        if(typingValue.length-1 == answer.length  || (key == KEY_TYPE.ENTER && typingValue.length == answer.length)){
             const passData = getCorrectContents().length;
             const failData = answer.length - passData;
             const wordAccuracy = parseInt(Math.floor(passData / answer.length * 100) - failData);     // 정확도 계산
