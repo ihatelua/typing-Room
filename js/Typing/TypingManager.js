@@ -52,13 +52,12 @@ export default function TypingManager() {
             liveCheck();                        // 실시간 체킹 시작
         }
     
-        if(event.code == KEY_TYPE.SPACE){
-            perfectTypingCheck(event.code);            // 문자열이 정확한지 확인
-        }
-    
-        if(event.code == KEY_TYPE.ENTER){
-            debugger;
-            perfectTypingCheck(event.code);               // 문자열이 정확한지 확인
+        if(event.code == KEY_TYPE.SPACE){       // 스페이스바를 입력했을 때
+            perfectTypingCheck(event.code);            
+        }else if(event.code == KEY_TYPE.ENTER){
+            perfectTypingCheck(event.code);     // 엔터를 입력했을 때
+        }else{
+            perfectTypingCheck("null");
         }
     }
 
@@ -69,7 +68,9 @@ export default function TypingManager() {
         let typingValue = inputTyping.value;
         let answer = tempContent.contents;
         
-        if(typingValue.length-1 == answer.length  || (key == KEY_TYPE.ENTER && typingValue.length == answer.length)){
+        if(    (key == KEY_TYPE.SPACE && typingValue.length-1 == answer.length)   // 스페이스바 일때
+            || (key == KEY_TYPE.ENTER && typingValue.length == answer.length)   // 엔터키일때
+            || (key == "null" && typingValue.length-1 > answer.length)){
             const passData = getCorrectContents().length;
             const failData = answer.length - passData;
             const wordAccuracy = parseInt(Math.floor(passData / answer.length * 100) - failData);     // 정확도 계산
