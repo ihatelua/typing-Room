@@ -70,10 +70,11 @@ export default function TypingManager() {
         
         if(    (key == KEY_TYPE.SPACE && typingValue.length-1 == answer.length)   // 스페이스바 일때
             || (key == KEY_TYPE.ENTER && typingValue.length == answer.length)   // 엔터키일때
-            || (key == "null" && typingValue.length-1 > answer.length)){
+            || (key == "null" && typingValue.length-1 >= answer.length)){
             const passData = getCorrectContents().length;
             const failData = answer.length - passData;
-            const wordAccuracy = parseInt(Math.floor(passData / answer.length * 100) - failData);     // 정확도 계산
+            let wordAccuracy = parseInt(Math.floor(passData / answer.length * 100) - failData);     // 정확도 계산
+                wordAccuracy = wordAccuracy >= 0 ? wordAccuracy : 0;
             const wordSpeed = typingSpeed.innerHTML;                                 // 현재타수
             
             // 최근타수 아카이브 저장
@@ -86,9 +87,9 @@ export default function TypingManager() {
 
             // 정확도 아카이브 저장
             if(archive.accuracy == 0){
-                archive.accuracy = wordAccuracy;
+                archive.accuracy = Math.floor(wordAccuracy);
             }else{
-                archive.accuracy = (archive.accuracy + wordAccuracy) / 2;
+                archive.accuracy = Math.floor((archive.accuracy + wordAccuracy) / 2);
             }
 
             // 카운트 아카이브 저장
