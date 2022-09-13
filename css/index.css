@@ -95,9 +95,6 @@ header .gnb li a.selected::after{
 
 
 /* 메인 */
-main{
-
-}
 section{
     position: relative;
     top: 10vh;
@@ -109,6 +106,7 @@ section:last-child{
     height: 90vh;
 }
 
+/* 섹션1 */
 section.home .content-wrap{
     width: 80%;
     min-width: 1000px;
@@ -164,12 +162,15 @@ section.home .startBtn:hover{
     color:#fff;
 }
 
-section.about{
-    background: #84fff3;
+/* 섹션2 */
+section.intro{
+    background: #1e4fff;
     opacity: 0.1;
 }
-section.intro{
-    background: #f47bff;
+
+/* 섹션3 */
+section.help{
+    background: #ff0055;
     opacity: 0.1;
 }
 
