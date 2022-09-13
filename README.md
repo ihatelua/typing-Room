@@ -18,10 +18,9 @@ ___
 게이지가 100%가 되면 가운데 룸에서 가구가 배치됩니다.
 ___
 
-인덱스 페이지가 미개발되어있으므로 테스트하려면<br>
+테스트하려면<br>
 vscode에 live Server 로 서버를 열어주고,
-main.html 을 실행시켜 링크에 ?map=normal 을 붙여주세요
-ex) http://localhost:5000/main.html?map=normal 
+index.html 을 실행시키면 됩니다.
 
 <br><br>
 
