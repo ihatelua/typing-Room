@@ -34,6 +34,7 @@ header > div{
     height: 100px;
     margin: 0 auto;
 }
+
 header .logo{
     float: left;
     color: #fff;
@@ -47,8 +48,6 @@ header .logo img{
     margin-top: 10px;
     margin-left: 10px;
     vertical-align: middle;
-    
-    /* padding-top: 15px; */
 }
 header .logo span{
     margin-top: 10px;
@@ -62,7 +61,6 @@ header .gnb{
     justify-content: space-around;
     align-items: center;
     height: 100%;
-    /* padding-top: 39px; */
 }
 header .gnb li {
     display: inline-block;
@@ -104,15 +102,68 @@ section{
     position: relative;
     top: 10vh;
     height: 80vh;
+    justify-content: space-around;
+    align-items: center;
 }
 section:last-child{
     height: 90vh;
 }
 
-section.home{
-    background: #f1c40f;
-    opacity: 0.1;
+section.home .content-wrap{
+    width: 80%;
+    min-width: 1000px;
+    max-width: 1209px;
+    height: 100%;
+    margin: 0 auto;
 }
+
+section.home img{
+    height: 150px;
+    margin-top: 250px;
+    margin-left: 10px;
+    vertical-align: middle;
+    float: left;
+}
+section.home .bar{
+    margin-top: 200px;
+    margin-left: 60px;
+    width: 7px;
+    height: 250px;
+    background: #FFFFFF;
+    float: left;
+}
+section.home .content-title{
+    margin-top: 222px;
+    margin-left: 60px;
+    color: #FFF;
+    font-size: 70px;
+    font-weight: bold;
+    float: left;
+}
+section.home .startBtn{
+    margin-top: 350px;
+    margin-left: -420px;
+    width: 139px;
+    height: 54px;
+    font-size: 30px;
+    background: #fff;
+    border-radius: 20px;
+    border:none;
+    float: left;
+    box-shadow: 3px 3px 3px #111;
+    transition-duration: 0.05s;
+}
+section.home .startBtn:active{
+    margin-top: 352px;
+    margin-left: -418px;
+    box-shadow: none;
+}
+section.home .startBtn:hover{
+    border:none;
+    background: linear-gradient(40deg,#2096ff,#a53fff) !important;
+    color:#fff;
+}
+
 section.about{
     background: #84fff3;
     opacity: 0.1;
@@ -134,7 +185,6 @@ footer{
     padding-top: 0px;
     color: #fff;
 }
-
 footer .footer-content{
     display: flex;
     align-items: center;
@@ -150,22 +200,18 @@ footer .socials{
     justify-content: center;
     margin: 1rem 0 0rem 0;
 }
-
 footer .socials li{
     margin: 0 10px;
 
 }
-
 footer .socials a {
     text-decoration: none;
     color:#fff
 }
-
 footer .socials a i{
     font-size: 1.5rem;
     transition: color .4s ease;
 }
-
 footer .socials a:hover i {
     color: #f1c40f
 }
@@ -176,13 +222,11 @@ footer .footer-bottom{
     padding: 20px 0;
     text-align: center;
 }
-
 footer .footer-bottom p{
     font-size: 14px;
     word-spacing: 2px;
     text-transform: capitalize;
 }
-
 footer .footer-bottom span{
     /* text-transform: uppercase; */
     opacity: .4;
