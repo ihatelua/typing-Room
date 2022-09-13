@@ -28,7 +28,6 @@ header > div{
     max-width: 1209px;
     height: 100px;
     margin: 0 auto;
-    
 }
 header .logo{
     float: left;
@@ -39,6 +38,7 @@ header .logo img{
     margin-top: 10px;
     margin-left: 10px;
     vertical-align: middle;
+    padding-top: 15px;
 }
 header .logo span{
     margin-top: 10px;
@@ -48,6 +48,7 @@ header .logo span{
 header .gnb{
     float: right;
     color: #fff;
+    padding-top: 39px;
 }
 header .gnb li {
     display: inline-block;
