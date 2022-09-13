@@ -22,7 +22,10 @@ ul, li {
 
 /* 헤더 */
 header{
-    background-color: rgba(0,0,0,0.7);
+    background-color: #111;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
 }
 header > div{
     width: 90%;
@@ -91,13 +94,38 @@ header .gnb li a.selected::after{
     width:100%;
 }
 
-/* 메인 */
 
+
+/* 메인 */
+main{
+
+}
+section{
+    position: relative;
+    top: 10vh;
+    height: 80vh;
+}
+section:last-child{
+    height: 90vh;
+}
+
+section.home{
+    background: #f1c40f;
+    opacity: 0.1;
+}
+section.about{
+    background: #84fff3;
+    opacity: 0.1;
+}
+section.intro{
+    background: #f47bff;
+    opacity: 0.1;
+}
 
 
 /* 푸터 */
 footer{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     background: #111;
     height: auto;
