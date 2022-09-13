@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="./css/index.css">
     <script src="https://kit.fontawesome.com/8a2d33e15d.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -39,8 +40,110 @@
         </section>
         <section class="section-02 intro scroll">
             <div class="blue"></div>
-
+            <div class="content-wrap">
+                <div class="img-slider">
+                    <div class="slide active">
+                        <img src="./img/background/베이스.png" alt="">
+                        <div class="info">
+                            <h2>NORMAL ROOM</h2>
+                            <p>asdasd</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="./img/background/indexBackground.png" alt="">
+                        <div class="info">
+                            <h2>11111 ROOM</h2>
+                            <p>11111</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="./img/background/indexBackgroundBaseImg.jpg" alt="">
+                        <div class="info">
+                            <h2>22222 ROOM</h2>
+                            <p>22222</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="./img/background/black.jpg" alt="">
+                        <div class="info">
+                            <h2>33333 ROOM</h2>
+                            <p>33333</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="./img/background/green.jpg" alt="">
+                        <div class="info">
+                            <h2>44444 ROOM</h2>
+                            <p>44444</p>
+                        </div>
+                    </div>
+                    <div class="navigation">
+                        <div class="btn active"></div>
+                        <div class="btn"></div>
+                        <div class="btn"></div>
+                        <div class="btn"></div>
+                        <div class="btn"></div>
+                    </div>
+                </div>
+            </div>
         </section>
+
+        <script>
+            let slides = document.querySelectorAll(".slide");
+            let btns = document.querySelectorAll(".btn");
+            let currentSlide = 1;
+
+            // active
+            let manualNav = (manual) => {
+                slides.forEach((slide) => {
+                    slide.classList.remove('active');
+
+                    btns.forEach((btn) => {
+                        btn.classList.remove('active');
+                    })
+                })
+
+                slides[manual].classList.add('active');
+                btns[manual].classList.add('active');
+            }
+
+            // 버튼클릭 이벤트
+            btns.forEach((btn, i) => {
+                btn.addEventListener('click', (e) => {
+                    manualNav(i);
+                    currentSlide = i;
+                })
+            })
+
+            // 자동으로 슬라이드 넘기기
+            let repeat = (activeClass) => {
+                let active = document.getElementsByClassName('active');
+                let i = 1;
+
+                let repeater = () => {
+                    setTimeout(() => {
+                        [...active].forEach((activeSlide) => {
+                            activeSlide.classList.remove('active');
+                        })
+
+                        slides[i].classList.add('active');
+                        btns[i].classList.add('active');
+                        i++;
+
+                        if(slides.length == i){
+                            i = 0;
+                        }
+                        if(i > slides.length){
+                            return 
+                        }
+                        repeater();
+                    }, 10000);
+                }
+                repeater();
+            }
+            repeat();
+        </script>
+
         <section class="section-03 help scroll">
             <div class="red"></div>
 
