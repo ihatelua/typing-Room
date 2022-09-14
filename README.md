@@ -3,6 +3,9 @@
 ![캡처](https://user-images.githubusercontent.com/54477695/189856124-95f6b4a2-cd9b-4794-8861-ad99a2afb001.png)
 ![캡처2](/md_assets/mainScreenShot.png)
 
+> [typingrpg.netlify.app](https://typingrpg.netlify.app/) 에서 타이핑 규칙과 디자인에 대해 영감을 받았습니다.
+
+
 # 1. 서비스 소개
 타이핑연습과 미니게임 요소를 추가한 형태의 미니게임입니다.
 <br>
