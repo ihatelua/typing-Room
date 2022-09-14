@@ -179,6 +179,7 @@ section.intro > .blue{
 
 .slider{
     margin: 0 auto;
+    margin-top: 140px;
     width: 800px;
     height: 500px;
     overflow: hidden;
@@ -204,13 +205,13 @@ section.intro > .blue{
 .navigation-manual{
     position: absolute;
     width: 800px;
-    margin-top: 200px;
+    margin-top: 250px;
     display: flex;
     justify-content: center;
 }
 
 .manual-btn{
-    border: 2px solid #40D3DC;
+    border: 2px solid #d7d7d7;
     padding: 5px;
     border-radius: 10px;
     cursor: pointer;
@@ -222,7 +223,7 @@ section.intro > .blue{
 }
 
 .manual-btn:hover{
-    background: #40D3DC;
+    background: #d7d7d7;
 }
 
 #radio1:checked ~ .first{
@@ -241,12 +242,12 @@ section.intro > .blue{
 .navigation-auto{
     position: absolute;
     width: 800px;
-    margin-top: 400px;
+    margin-top: 450px;
     display: flex;
     justify-content: center;
 }
 .navigation-auto div{
-    border: 2px solid #40D3DC;
+    border: 2px solid #d7d7d7;
     padding: 5px;
     border-radius: 10px;
     transition: 1s;
@@ -257,23 +258,186 @@ section.intro > .blue{
 }
 
 #radio1:checked ~ .navigation-auto .auto-btn1{
-    background: #40D3DC;
+    background: #d7d7d7;
 }
 #radio2:checked ~ .navigation-auto .auto-btn2{
-    background: #40D3DC;
+    background: #d7d7d7;
 }
 #radio3:checked ~ .navigation-auto .auto-btn3{
-    background: #40D3DC;
+    background: #d7d7d7;
 }
 #radio4:checked ~ .navigation-auto .auto-btn4{
-    background: #40D3DC;
+    background: #d7d7d7;
 }
 
 .slide div.info{
-    position: inherit;
-    margin-top: -80px;
+    position: relative;
+    margin-top: -500px;
+    width: 800px;
+    height: 500px
+}
+.slide div.info .header{
+    font-family: 'Inter';
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    line-height: 130px;
+    font-weight: 800;
+    font-size: 36px;
     color: #fff;
 }
+
+.slide div.info > .left{
+    width: 350px;
+    height: 100%;
+    float: left;
+}
+.slide div.info .header-bar{
+    width: 100%;
+    height: 1px;
+    margin-top: -40px;
+    background: rgba(230, 230, 230, 0.9);
+}
+.slide div.info .content{
+    width: 350px;
+    height: 400px;
+}
+.slide div.info .rating-title{
+    margin-left: 30px;
+    width: 320px;
+    height: 40px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 17px;
+    line-height: 50px;
+    color: rgba(230, 230, 230, 0.9);
+}
+.slide div.info .rating-star{
+    padding: 5px 5px 15px 5px;
+    cursor: pointer; 
+    display: flex;
+    justify-content: center;
+}
+.slide div.info .rating-star .star{
+    width: 50px;
+    height: 50px;
+    background: url(../img/icon/star.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+}
+.slide div.info .rating-star .half-star{
+    width: 50px;
+    height: 50px;
+    background: url(../img/icon/half-star.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+}
+.slide div.info .rating-star .blank-star{
+    width: 50px;
+    height: 50px;
+    background: url(../img/icon/blank-star.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+}
+.slide div.info .detail-line{
+    padding: 10px 0px 11px 30px;
+    width: 320px;
+    height: 50px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    line-height: 50px;
+}
+.slide div.info .detail-line .detail-title{
+    width: 100px;
+    height: auto;
+    float: left;
+    font-size: 17px;
+    color: rgba(230, 230, 230, 0.9);
+}
+.slide div.info .detail-line .detail-content{
+    padding-right: 10px;
+    width: 210px;
+    height: auto;
+    float: left;
+    text-align: right;
+    font-size: 23px;
+    color: #fff;
+}
+
+
+.slide div.info > .right{
+    width: 450px;
+    height: 100%;
+    float: left;
+}
+.slide div.info > .right .room{
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+    background: url('../img/normal/level3.png');
+    background-repeat: no-repeat;
+    background-size: 550px;
+    background-position: center;
+    filter: drop-shadow(0px 100px 0px rgba(0, 0, 0, 0.25));
+}
+.slide div.info > .right .blank-room{
+    width: 100%;
+    height: 400px;
+    margin-top: -20px;
+    background: url('../img/blank-room.png');
+    background-repeat: no-repeat;
+    background-size: 350px;
+    background-position: center;
+    filter: drop-shadow(0px 100px 0px rgba(0, 0, 0, 0.25));
+}
+
+.slide div.section2Base{
+    width: 800px;
+    height: 500px;
+    background: #fff;
+}
+.slide div.sliderComingSoon{
+    position: relative;
+    margin-top: -350px;
+    background: rgba(0, 0, 0, 0.65);
+    width: 800px;
+    height: 200px;
+
+    color: #fff;
+    font-size: 80px;
+    font-weight: bold;
+    font-family: 'Inter';
+    text-align: center;
+    line-height: 2.3;
+    display: table-caption;
+}
+
+.slide div.slideGradation{
+    position: relative;
+    margin-top: -500px;
+    width: 800px;
+    height: 500px;
+}
+.slide div.sliderGradation-black{
+    position: relative;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(65, 65, 65, 0.598958) 59.9%, #000000 100%);
+    margin-top: -500px;
+    width: 800px;
+    height: 500px;
+}
+.slide div.sliderGradation-sideBar{
+    position: relative;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0%) 0%, rgb(54 54 54 / 34%) 100%);
+    margin-top: -500px;
+    width: 350px;
+    height: 500px;
+}
+
 
 
 
