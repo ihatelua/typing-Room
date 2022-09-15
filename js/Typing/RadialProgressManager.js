@@ -9,7 +9,7 @@ import {initResultModalStyleTemp, initResultModalTemp, initResultChartFooterTemp
  * @param {백그라운드 색깔} backgroundColor 
  * @param {순서} zIndex 
  */
- export default function RadialProgressManager(parentId, id, size,  barSize, barColor, backgroundColor, zIndex)  {
+ export default function RadialProgressManager(parentId, data)  {
     let progress = 0;
     let requestAnimationFrame = window.requestAnimationFrame ||
         window.mozRequestAnimationFrame ||
@@ -18,14 +18,14 @@ import {initResultModalStyleTemp, initResultModalTemp, initResultChartFooterTemp
         window.msRequestAnimationFrame;
 
     // 선언과 동시에 차트 템플릿을 생성시킨다.
-    initResultModalStyleTemp(id, size, barSize, barColor, backgroundColor, zIndex);
-    initResultModalTemp(parentId, id);
+    initResultModalStyleTemp(data.id, data.size, data.barSize, data.barColor, data.backgroundColor, data.zIndex);
+    initResultModalTemp(parentId, data.id);
     
 
     // 원형차트 삭제
     const remove = () => {
-        let radialProgress = document.getElementsByClassName("radial-progress" + id)[0];
-        let style = document.getElementById(id + "Css");
+        let radialProgress = document.getElementsByClassName("radial-progress" + data.id)[0];
+        let style = document.getElementById(data.id + "Css");
         let scale = 1;
         let deltaScale = 0.1 / 10;
 
@@ -78,7 +78,7 @@ import {initResultModalStyleTemp, initResultModalTemp, initResultChartFooterTemp
                 // setTimeout(function() {
                 //     remove();   // 종료
                 // }, 1000);
-                initResultChartFooterTemp("chartFooter", {"legendColor" : barColor, "legendName": name, "legendId": id, "legendPercent": percent})
+                initResultChartFooterTemp("chartFooter", {"legendColor" : data.barColor, "legendName": name, "legendId": id, "legendPercent": percent})
             }
         }
 

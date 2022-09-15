@@ -53,23 +53,17 @@ export default function resultModalManager()  {
 
     /**
      * 모달 차트 이벤트
+     * @comment new RadialProgressManager("circleChart", 'A', 180, 10, '#EB6540', '#FFF', '60')
      */
      this.createChartEvent = () => {
+        // 모달 백그라운드 클래스 삭제
         document.getElementsByClassName("modalWrap")[0].classList.remove("none");
 
-        let ChartArr = [];
-        chartModalData.forEach((data) => {
-            ChartArr.push(new RadialProgressManager("circleChart", data.id, data.size, data.barSize, data.barColor, data.backgroundColor, data.zIndex));
-        });
-
-        // 사이즈, id, 바 사이즈, 바 색깔, 백그라운드 색깔, z-index
-        // let progress = new RadialProgressManager("circleChart", 'A', 180, 10, '#EB6540', '#FFF', '60');
-        // let progress2 = new RadialProgressManager("circleChart", 'B', 130, 10, '#48A7BD', '#FFF', '65');
-        // let progress3 = new RadialProgressManager("circleChart", 'C', 80, 10, '#A66EF5', '#FFF', '70');
+        // 모달 차트 클래스 가져오기
+        let ChartArr = chartModalData.map(data => new RadialProgressManager("circleChart", data))
 
         // 나중에 ajax 로 상위 몇퍼센트 인지 가져올 라인
         // 퍼센트를 가져와서 아래 차트애니메이션 데이터를 뿌린다.
-
 
         // 1초 뒤에 차트 애니메이션 시작
         time = setTimeout(function () {
@@ -80,7 +74,7 @@ export default function resultModalManager()  {
 
         time2 = setTimeout(function () {
             getChartGrade("inner-circle" + chartModalData[2].id, [5,5,5])
-            document.getElementsByClassName("inner-circle" + chartModalData[2].id)[0].firstChild.classList.add("fadeIn")
+            document.getElementsByClassName("inner-circle" + chartModalData[2].id)[0].firstElementChild.classList.add("fadeIn")
         }, 1500);
     }
 

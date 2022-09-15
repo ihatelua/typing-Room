@@ -3,19 +3,15 @@
  * @param {TypingMockData.Content} data 
  * @returns 
  */
-const createTypingTemp = data => {
-    return `<span class="normal" id="tempContents">${data}</span>`
-}
+const createTypingTemp = data => `<span class="normal" id="tempContents">${data}</span>`
 
 /**
  * 샘플데이터를 세팅한다.
  * @param {TypingMockData.Content} data 
  */
 export const initTypingTemp = (data) => {
-    for(let i = 0; i < data.length; i++){
-        let char = data[i];
-        document.getElementById('typingTemp').insertAdjacentHTML('beforeend', createTypingTemp(char));
-    }
+    const sample = [...data].map(temp => createTypingTemp(temp)).join('');
+    document.getElementById('typingTemp').insertAdjacentHTML('beforeend', sample);
 }
 
 
@@ -24,9 +20,7 @@ export const initTypingTemp = (data) => {
  * @param {레벨} level 
  * @returns 
  */
-const createNormalRoom = level => {
-    return `<object class="room" data="./img/normal/level${level}.svg" type="image/svg+xml" id="room"> </object>`
-}
+const createNormalRoom = level => `<object class="room" data="./img/normal/level${level}.svg" type="image/svg+xml" id="room"> </object>`
 
 /**
  * 게임 룸을 세팅한다.
@@ -47,9 +41,8 @@ const createNormalRoom = level => {
  * 결과창모달 베이스 템플릿
  * @param {titleDate, roomSrc, maxSpeed, avgSpeed, accPercent} json
  */
-const createResultModalBase = (json) => {
-    return `
-    <div class="modalWrap none" id="modalWrap">
+const createResultModalBase = (json) => 
+    `<div class="modalWrap none" id="modalWrap">
 
         <div class="resultModal" id="resultModal">
         <!-- 모달 타이틀-->
@@ -146,10 +139,7 @@ const createResultModalBase = (json) => {
         <!-- 모달 베이스 끝-->
             
         </div>
-    </div>
-    
-    `;
-}
+    </div>`
 
 /**
  * 결과창모달 베이스를 세팅한다.
@@ -170,9 +160,46 @@ export const initResultModalBaseTemp = (parentId, json) => {
  * @param {innerSize} innerSize 
  * @param {innerMargin} innerMargin 
  */
-const createResultModalStyle = (id, size, barSize, barColor, backgroundColor, zIndex, innerSize, innerMargin) => {
-    return `<style type="text/css" id="${id}Css">.radial-progress${id} {width: ${size}px;height: ${size}px;position: absolute;margin: auto;top: 0; right: 0; bottom: 0; left: 0;z-index: ${zIndex};background-color: #DDD;border-radius: 50%;box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);}.radial-progress${id} .inner-circle${id} {width: ${innerSize}px;height: ${innerSize}px;position: absolute;margin-top: ${innerMargin}px;margin-left: ${innerMargin}px;background-color: ${backgroundColor};border-radius: 50%;z-index: 10;}.radial-progress${id} .outer-circle${id} .mask${id},.radial-progress${id} .outer-circle${id} .fill${id} {width: ${size}px;height: ${size}px;position: absolute;border-radius: 50%;-webkit-backface-visibility: hidden;}.radial-progress${id} .outer-circle${id} .mask${id} {clip: rect(0px, ${size}px, ${size}px, ${size / 2}px);}.radial-progress${id} .outer-circle${id} .mask${id} .fill${id} {clip: rect(0px, ${size / 2}px, ${size}px, 0px);background-color: ${barColor};}</style>`
-}
+const createResultModalStyle = (id, size, barSize, barColor, backgroundColor, zIndex, innerSize, innerMargin) => 
+    `<style type="text/css" id="${id}Css">
+        .radial-progress${id} {
+            width: ${size}px;
+            height: ${size}px;
+            position: absolute;
+            margin: auto;
+            top: 0; 
+            right: 0; 
+            bottom: 0; 
+            left: 0;
+            z-index: ${zIndex};
+            background-color: #DDD;
+            border-radius: 50%;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .radial-progress${id} .inner-circle${id} {
+            width: ${innerSize}px;
+            height: ${innerSize}px;
+            position: absolute;
+            margin-top: ${innerMargin}px;
+            margin-left: ${innerMargin}px;
+            background-color: ${backgroundColor};
+            border-radius: 50%;z-index: 10;
+        }
+        .radial-progress${id} .outer-circle${id} .mask${id},.radial-progress${id} .outer-circle${id} .fill${id} {
+            width: ${size}px;
+            height: ${size}px;
+            position: absolute;
+            border-radius: 50%;
+            -webkit-backface-visibility: hidden;
+        }
+        .radial-progress${id} .outer-circle${id} .mask${id} {
+            clip: rect(0px, ${size}px, ${size}px, ${size / 2}px);
+        }
+        .radial-progress${id} .outer-circle${id} .mask${id} .fill${id} {
+            clip: rect(0px, ${size / 2}px, ${size}px, 0px);
+            background-color: ${barColor};
+        }
+    </style>`
 
 /**
  * 결과창모달 차트 스타일을 세팅한다.
@@ -194,9 +221,21 @@ export const initResultModalStyleTemp = (id, size, barSize, barColor, background
  * 결과창모달 차트 템플릿
  * @param {className} id 
  */
-const createResultModal = (id) => {
-    return `<div class="radial-progress${id}"><div class="inner-circle${id}"><div class="chartGrade" id="chartGrade"></div></div><div class="outer-circle${id}"><div class="mask${id} full${id}"><div class="fill${id}"></div></div><div class="mask${id}"><div class="fill${id}"></div><div class="fill${id} fix${id}"></div></div></div></div>`
-}
+const createResultModal = (id) => 
+    `<div class="radial-progress${id}">
+        <div class="inner-circle${id}">
+            <div class="chartGrade" id="chartGrade"></div>
+        </div>
+        <div class="outer-circle${id}">
+            <div class="mask${id} full${id}">
+                <div class="fill${id}"></div>
+            </div>
+            <div class="mask${id}">
+                <div class="fill${id}"></div>
+                <div class="fill${id} fix${id}"></div>
+            </div>
+        </div>
+    </div>`
 
 /**
  * 결과창모달을 차트 템플릿을 세팅한다.
@@ -209,29 +248,19 @@ export const initResultModalTemp = (parentId, id) => {
 
 /**
  * 결과창모달 푸터 범례 템플릿
+ * @comment red, blue, purple
  */
-// red, blue, purple
-const createResultChartFooter = (legendColor, legendName, legendId, legendPercent) => {
-    return `<div class="chartLabel"><div class="chartPoint" style="background:${legendColor};"></div><div class="chartText">${legendName}</div><span class="tooltip-text" id="legend-${legendId}">${legendPercent}%</span></div>`
-}
+const createResultChartFooter = (json) => 
+    `<div class="chartLabel">
+        <div class="chartPoint" style="background:${json.legendColor};"></div>
+        <div class="chartText">${json.legendName}</div>
+        <span class="tooltip-text" id="legend-${json.legendId}">${json.legendPercent}%</span>
+    </div>`
 
 /**
  * 결과창모달 푸터 범례 템플릿을 세팅한다.
  * @param {부모Id, {색깔, 범례이름, 차트id, 퍼센트}} parentId, json
  */
 export const initResultChartFooterTemp = (parentId, json) => {
-    document.getElementById(parentId).insertAdjacentHTML('beforeend', createResultChartFooter(json.legendColor, json.legendName, json.legendId, json.legendPercent));
+    document.getElementById(parentId).insertAdjacentHTML('beforeend', createResultChartFooter(json));
 }
-
-
-/**
- * 노드를 삭제한다.
- * @param { 노드 id } id
- */
-export const deleteNode = (id) => {
-    let chart = document.getElementById(id);
-    while (chart.hasChildNodes()) {
-        chart.removeChild(chart.firstChild);
-    }
-}
-
