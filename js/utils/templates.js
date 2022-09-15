@@ -14,7 +14,6 @@ export const initTypingTemp = (data) => {
     document.getElementById('typingTemp').insertAdjacentHTML('beforeend', sample);
 }
 
-
 /**
  * 노말 룸을 세팅할 템플릿
  * @param {레벨} level 
@@ -22,20 +21,21 @@ export const initTypingTemp = (data) => {
  */
 const createNormalRoom = level => `<object class="room" data="./img/normal/level${level}.svg" type="image/svg+xml" id="room"> </object>`
 
+
+/**
+ * 게임 룸 타입 세팅
+ */
+const gameRoomTempJSON = {
+    normal: level => document.getElementById("gameBox").insertAdjacentHTML('beforeend', createNormalRoom(level))
+  , default: level => undefined
+}
+const gameRoomTempfn = (obj, defaultCase = 'default') => (gameType, level) => (obj[gameType] || obj[defaultCase])(level);
+
 /**
  * 게임 룸을 세팅한다.
  * @param {게임타입, 레벨} gameType, level 
  */
- export const initGameRoomTemp = (gameType, level) => {
-    switch (gameType) {
-        case "normal":
-            document.getElementById("gameBox").insertAdjacentHTML('beforeend', createNormalRoom(level));
-            break;
-    
-        default:
-            break;
-    }
-}
+ export const initGameRoomTemp = gameRoomTempfn(gameRoomTempJSON, 'default');
 
 /**
  * 결과창모달 베이스 템플릿

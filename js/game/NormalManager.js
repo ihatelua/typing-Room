@@ -2,6 +2,23 @@ import {NORMAL_LEVEL_1, NORMAL_LEVEL_2, NORMAL_LEVEL_3, NORMAL_LEVEL_4, NORMAL_L
 import {initGameRoomTemp} from '../utils/templates.js'  // 룸 데이터 세팅모듈을 가져온다.
 
 export default function NormalManager() {
+    const levelLengthJSON = {
+        1: NORMAL_LEVEL_1.length
+      , 2: NORMAL_LEVEL_2.length
+      , 3: NORMAL_LEVEL_3.length
+      , 4: NORMAL_LEVEL_4.length
+      , 5: NORMAL_LEVEL_5.length
+      , default: undefined
+    }
+    const levelObjectJSON = {
+        1: cnt => NORMAL_LEVEL_1[cnt]
+      , 2: cnt => NORMAL_LEVEL_2[cnt]
+      , 3: cnt => NORMAL_LEVEL_3[cnt]
+      , 4: cnt => NORMAL_LEVEL_4[cnt]
+      , 5: cnt => NORMAL_LEVEL_5[cnt]
+      , default: () => undefined
+    }
+
     const background = document.getElementById("mainhead");
     let object = null;                 // 룸 요소
     let gameRoom = null;               // 룸 svg 요소
@@ -32,7 +49,7 @@ export default function NormalManager() {
     
     const nextRoomObject = () => {
         // 다음라운드로
-        if(getLevelLength(currentLevel) != currentObjectCount + 1){  
+        if(getLevelLength(currentLevel) != currentObjectCount + 1){
             currentRound = getLevelObject(currentLevel, ++currentObjectCount);
             gameRoom.getElementsByClassName(currentRound)[0].classList.remove("none");      // 오브젝트 보이기
             gameRoom.getElementsByClassName(currentRound)[0].classList.add("vibration");    // 오브젝트 애니메이션 추가
@@ -52,40 +69,13 @@ export default function NormalManager() {
     }
 
     // 레벨의 총 길이를 가져온다.
-    const getLevelLength = (level) => {
-        switch (level) {
-            case 1:
-                return NORMAL_LEVEL_1.length;
-            case 2:
-                return NORMAL_LEVEL_2.length;
-            case 3:
-                return NORMAL_LEVEL_3.length;
-            case 4:
-                return NORMAL_LEVEL_4.length;
-            case 5:
-                return NORMAL_LEVEL_5.length;
-            default:
-                break;
-        }
-    }
+    const getLevelLengthFn = (obj, defaultCase = 'default') => expression  => obj[expression] || obj[defaultCase];
+    const getLevelLength = getLevelLengthFn(levelLengthJSON, 'default');
+
 
     // 레벨의 오브젝트 값을 가져온다.
-    const getLevelObject = (level, cnt) => {
-        switch (level) {
-            case 1:
-                return NORMAL_LEVEL_1[cnt];
-            case 2:
-                return NORMAL_LEVEL_2[cnt];
-            case 3:
-                return NORMAL_LEVEL_3[cnt];
-            case 4:
-                return NORMAL_LEVEL_4[cnt];
-            case 5:
-                return NORMAL_LEVEL_5[cnt];
-            default:
-                break;
-        }
-    }
+    const getLevelObjectFn = (obj, defaultCase = 'default') => (expression, cnt) => (obj[expression] || obj[defaultCase])(cnt)
+    const getLevelObject = getLevelObjectFn(levelObjectJSON, 'default');
 
     return {
         initRoomSetting,
