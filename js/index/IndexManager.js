@@ -1,3 +1,5 @@
+import {initIndexSlideTemp} from '../utils/templates.js';    
+
 (function IndexManager() {
     /**
      * 메뉴선택시 스크롤 이벤트
@@ -55,11 +57,25 @@
         }, 5000);
     }
 
-    /**
+
+    /** 
      * 모듈 및 템플릿 세팅
      */
     const setModules = () => {
-
+        initIndexSlideTemp([
+            {
+                red: '50',
+                green: '214',
+                blue: '200',
+                starArr: ['star','star','half-star','blank-star','blank-star'],
+                level: '5',
+                funitureCnt: '54',
+                question: 'RANDOM'
+            },
+            {},
+            {},
+            {}
+        ])
     }
 
     /**

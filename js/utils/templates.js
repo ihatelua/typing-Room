@@ -1,4 +1,188 @@
 /**
+ * 인덱스 슬라이드 라디오 부모 템플릿
+ * @param {jsonArr length의 인덱스 배열} selectArr 
+ * @returns 
+ */
+const createIndexSlideRadioParent = selectArr => selectArr.map(temp => createIndexSlideRadioChild(temp)).join('')
+
+/**
+ * 인덱스 슬라이드 라디오 자식 템플릿
+ * @param {인덱스} index 
+ * @returns 
+ */
+const createIndexSlideRadioChild = index => `<input type="radio" name="radio-btn" id="radio${index}" ${index == 1 ? "checked" : ""}>`
+
+
+/**
+ * 인덱스 슬라이드 내용을 세팅할 부모 템플릿
+ */
+const createIndexSlideContentParent = (jsonArr) => {
+    return jsonArr.map((temp, index) => {
+        if(Object.keys(temp) != 0){
+            return createIndexSlideContentChild(index, temp);
+        }else{
+            return createIndexSlideContentBlankChild(index);
+        }
+    }).join('')
+}
+
+/**
+ * 인덱스 슬라이드 내용을 세팅할 템플릿
+ * @param {} json 
+ * @returns 
+ */
+const createIndexSlideContentChild = (index, json) => {
+    return `
+        <div class="slide ${index == 0 ? 'first' : ''}">
+                                    
+            <div class="section2Base"></div>
+            
+            <div class="sliderGradation-sideBar"></div>
+            <div class="sliderGradation" style="background: linear-gradient(90deg, 
+                rgb(${json.red}, ${json.green}, ${json.blue}) 0%, rgba(${ (json.red > 90 ? (json.red + ', 255, ' + (Number(json.blue)  + 15))
+                                                                                         : (json.red + ','       + (Number(json.green) + 15) + ',255')) } , 0.201) 100%, rgba(217, 217, 217, 0) 100%);"></div>
+            <div class="sliderGradation-black"></div>
+            
+            <div class="info">
+                <div class="left">
+                    <div class="header">
+                        DETAIL
+                        <div class="header-bar"></div>
+                    </div>
+                    <div class="content">
+                        <div class="rating-title">난이도</div>
+                        <div class="rating-star">
+                            ${json.starArr.map(temp => createIndexSlideStar(temp)).join('')}
+                        </div>
+                        <div class="detail-line">
+                            <div class="detail-title">총 레벨</div>
+                            <div class="detail-content">${json.level} 레벨</div>
+                        </div>
+                        <div class="detail-line">
+                            <div class="detail-title">가구 수</div>
+                            <div class="detail-content">총 ${json.funitureCnt}개의 가구</div>
+                        </div>
+                        <div class="detail-line">
+                            <div class="detail-title">문제유형</div>
+                            <div class="detail-content">${json.question}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="header">
+                        NORMAL ROOM
+                    </div>
+                    <div class="room"></div>
+                </div>
+            </div>
+        </div>
+    `
+}
+
+const createIndexSlideContentBlankChild = (index) => {
+    return `
+        <div class="slide ${index == 0 ? `first` : ``}">
+            <div class="section2Base"></div>
+
+            <div class="sliderGradation-sideBar"></div><!-- (15.29, 51, 25.5)    85.10-->
+            <div class="sliderGradation" style="background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(6, 20, 9, 0.5) 54.17%, rgba(217, 217, 217, 0) 100%);"></div>
+            <div class="sliderGradation-black"></div>
+            
+            <div class="info">
+                <div class="left">
+                    <div class="header">
+                        DETAIL
+                        <div class="header-bar"></div>
+                    </div>
+                    <div class="content">
+                        <div class="rating-title">난이도</div>
+                        <div class="rating-star">
+                            <div class="blank-star"></div>
+                            <div class="blank-star"></div>
+                            <div class="blank-star"></div>
+                            <div class="blank-star"></div>
+                            <div class="blank-star"></div>
+                        </div>
+                        <div class="detail-line">
+                            <div class="detail-title">총 레벨</div>
+                            <div class="detail-content">X 레벨</div>
+                        </div>
+                        <div class="detail-line">
+                            <div class="detail-title">가구 수</div>
+                            <div class="detail-content">총 XX개의 가구</div>
+                        </div>
+                        <div class="detail-line">
+                            <div class="detail-title">문제유형</div>
+                            <div class="detail-content">XXXXXX</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="header">
+                        XXXXX ROOM
+                    </div>
+                    <div class="blank-room"></div>
+                </div>
+            </div>
+            <div class="sliderComingSoon">COMING SOON</div>
+        </div>
+    `
+}
+
+/**
+ * 인덱스 슬라이드 내용의 별표를 세팅할 템플릿
+ * @param {클래스 이름} classNm 
+ * @returns 
+ */
+const createIndexSlideStar = classNm => `<div class="${classNm}"></div>`;
+
+
+/**
+ * 인덱스 슬라이드 네비게이션 auto 부모 템플릿
+ * @param {jsonArr length의 인덱스 배열} selectArr 
+ * @returns 
+ */
+const createIndexSlideNavigationAutoParent = (selectArr) => `<div class="navigation-auto">${selectArr.map(temp => createIndexSlideNavigationAutoChild(temp)).join('')}</div>`
+
+/**
+ * 인덱스 슬라이드 네비게이션 auto 자식 템플릿
+ * @param {인덱스} index
+ * @returns
+ */
+const createIndexSlideNavigationAutoChild = index => `<div class="auto-btn${index}"></div>`;
+
+
+/**
+ * 인덱스 슬라이드 네비게이션 manual 부모 템플릿
+ * @param {jsonArr length의 인덱스 배열} selectArr 
+ * @returns 
+ */
+const createIndexSlideNavigationManualParent = selectArr => `<div class="navigation-manual">${selectArr.map(temp => createIndexSlideNavigationManualChild(temp)).join('')}</div>`;
+
+/**
+ * 인덱스 슬라이드 네비게이션 manual자식 템플릿
+ * @param {인덱스} index
+ * @returns 
+ */
+ const createIndexSlideNavigationManualChild = index => `<label for="radio${index}" class="manual-btn"></label>`;
+
+/**
+ * 인덱스 슬라이드 세팅
+ * @param {인덱스 슬라이드 데이터} jsonArr
+ */
+export const initIndexSlideTemp = jsonArr => {
+    let length = jsonArr.length;
+    let selectArr = Array.from({length}, (v, i) => i+1);  // [1,2,3,4...]
+    return [
+        createIndexSlideRadioParent(selectArr),                 // 라디오 버튼
+        createIndexSlideContentParent(jsonArr),                 // 슬라이드 설명
+        createIndexSlideNavigationAutoParent(selectArr),        // 네비게이션 auto
+        createIndexSlideNavigationManualParent(selectArr),      // 네비게이션 manual
+    ].join('')
+}
+
+
+/**
  * 샘플데이터 세팅할 템플릿
  * @param {TypingMockData.Content} data 
  * @returns 
