@@ -57,7 +57,7 @@ export default function TypingManager() {
         }else if(event.code == KEY_TYPE.ENTER){
             perfectTypingCheck(event.code);     // 엔터를 입력했을 때
         }else{
-            perfectTypingCheck("null");
+            perfectTypingCheck();
         }
     }
 
@@ -70,7 +70,7 @@ export default function TypingManager() {
         
         if(    (key == KEY_TYPE.SPACE && typingValue.length-1 == answer.length)   // 스페이스바 일때
             || (key == KEY_TYPE.ENTER && typingValue.length == answer.length)   // 엔터키일때
-            || (key == "null" && typingValue.length-1 >= answer.length)){
+            || (!key && typingValue.length-1 >= answer.length)){
             const passData = getCorrectContents().length;
             const failData = answer.length - passData;
             let wordAccuracy = parseInt(Math.floor(passData / answer.length * 100) - failData);     // 정확도 계산

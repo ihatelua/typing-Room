@@ -5,8 +5,8 @@ import {initResultModalBaseTemp} from '../utils/templates.js';
  * 결과모달창 매니저
  */
 export default function resultModalManager()  {
-    let time = null;
-    let time2 = null;
+    let time;
+    let time2;
     let chartGradeJSON = {};
 
     // 결과모달창 베이스 데이터

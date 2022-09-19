@@ -12,8 +12,8 @@ import resultModalManager from '../Typing/resultModalManager.js';
     const typingMain = new TypingManager();                 // 타이핑매니저 선언
     const resultModal = new resultModalManager();           // 모달매니저 선언
     const Util = new util();
-    let manager = null;  
-    let background = null;  
+    let manager;  
+    let background;  
     
     // 다음라운드
     // ./img/normal/level1.png
