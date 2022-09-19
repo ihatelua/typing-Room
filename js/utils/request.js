@@ -3,7 +3,7 @@
  */
 export default function Request() {
     this.getParameter = function(name) {  
-        var rtnval = '';  
+        var rtnval = 'typing-Room';  
         var nowAddress = unescape(location.href);  
         var parameters = (nowAddress.slice(nowAddress.indexOf('?') + 1,  
                 nowAddress.length)).split('&');  
