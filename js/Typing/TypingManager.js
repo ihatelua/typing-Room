@@ -245,7 +245,7 @@ export default function TypingManager() {
                 mainhead.classList.remove('shake');
             }, 50);
             missScore++;
-            console.log(missScore)
+            // console.log(missScore)
         }
     }
 
