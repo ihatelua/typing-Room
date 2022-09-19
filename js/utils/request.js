@@ -3,7 +3,6 @@
  */
 export default function Request() {
     this.getParameter = function(name) {  
-        debugger;
         var rtnval = '';  
         var nowAddress = unescape(location.href);  
         var parameters = (nowAddress.slice(nowAddress.indexOf('?') + 1,  
