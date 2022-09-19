@@ -22,9 +22,7 @@ ___
 게이지가 100%가 되면 가운데 룸에서 가구가 배치됩니다.
 ___
 
-테스트하려면<br>
-vscode에 live Server 로 서버를 열어주고,
-index.html 을 실행시키면 됩니다.
+https://ihatelua.github.io/typing-Room/
 
 <br><br>
 
