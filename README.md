@@ -2,6 +2,7 @@
 
 ![캡처](https://user-images.githubusercontent.com/54477695/189856124-95f6b4a2-cd9b-4794-8861-ad99a2afb001.png)
 ![캡처2](/md_assets/mainScreenShot.png)
+![캡처3](https://user-images.githubusercontent.com/54477695/190976586-67f09b6c-453a-4c7d-a51e-aecc6566e717.png)
 
 > [typingrpg.netlify.app](https://typingrpg.netlify.app/) 에서 타이핑 규칙과 디자인에 대해 영감을 받았습니다.
 
