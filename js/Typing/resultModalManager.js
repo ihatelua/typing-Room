@@ -7,6 +7,7 @@ import {initResultModalBaseTemp} from '../utils/templates.js';
 export default function resultModalManager()  {
     let time = null;
     let time2 = null;
+    let chartGradeJSON = {};
 
     // 결과모달창 베이스 데이터
     let baseModalData = {
@@ -73,7 +74,7 @@ export default function resultModalManager()  {
         }, 1000);
 
         time2 = setTimeout(function () {
-            getChartGrade("inner-circle" + chartModalData[2].id, [5,5,5])
+            setChartGrade("inner-circle" + chartModalData[2].id, [5,5,5])
             document.getElementsByClassName("inner-circle" + chartModalData[2].id)[0].firstElementChild.classList.add("fadeIn")
         }, 1500);
     }
@@ -94,38 +95,31 @@ export default function resultModalManager()  {
         this.createModal();   
     }
 
-    const getChartGrade = (domId, percentArr) => {
-        let chartGrade = document.getElementsByClassName(domId)[0].firstChild;
+   
+    const getChartGrade = (chartGrade, data) => 
+        chartGradeJSON = {
+              [0  < data && data <= 5   ?  'P' : 'F']  : "S+"
+            , [5  < data && data <= 10  ?  'P' : 'F']  : "S"
+            , [10 < data && data <= 20  ?  'P' : 'F']  : "A+"
+            , [20 < data && data <= 30  ?  'P' : 'F']  : "A"
+            , [30 < data && data <= 40  ?  'P' : 'F']  : "A-"
+            , [40 < data && data <= 50  ?  'P' : 'F']  : "B+"
+            , [50 < data && data <= 60  ?  'P' : 'F']  : "B"
+            , [60 < data && data <= 70  ?  'P' : 'F']  : "C"
+            , [70 < data && data <= 80  ?  'P' : 'F']  : "D"
+            , [80 < data && data <= 90  ?  'P' : 'F']  : "E"
+            , [90 < data && data <= 100 ?  'P' : 'F']  : "F"
+        }['P']
+
+    const setChartGrade = (domId, percentArr) => {
+        let chartGrade = document.getElementsByClassName(domId)[0].children[0];
         let sum = 0;
         let arg = 0;
         percentArr.forEach((data) => {
             sum += data;
         });
         arg = sum / percentArr.length;
-
-        if(arg <= 5){
-            chartGrade.innerHTML = "S+";
-        }else if(arg <= 10){
-            chartGrade.innerHTML = "S";
-        }else if(arg <= 20){
-            chartGrade.innerHTML = "A+";
-        }else if(arg <= 30){
-            chartGrade.innerHTML = "A";
-        }else if(arg <= 40){
-            chartGrade.innerHTML = "A-";
-        }else if(arg <= 50){
-            chartGrade.innerHTML = "B+";
-        }else if(arg <= 60){
-            chartGrade.innerHTML = "B";
-        }else if(arg <= 70){
-            chartGrade.innerHTML = "C";
-        }else if(arg <= 80){
-            chartGrade.innerHTML = "D";
-        }else if(arg <= 90){
-            chartGrade.innerHTML = "E";
-        }else if(arg <= 100){
-            chartGrade.innerHTML = "F";
-        }
+        chartGrade.innerHTML = getChartGrade(chartGrade, arg);
     }
 
     this.setBaseModalData = (data) => {

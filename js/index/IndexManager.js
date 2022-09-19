@@ -1,4 +1,4 @@
-function Admin() {
+(function IndexManager() {
     /**
      * 메뉴선택시 스크롤 이벤트
      */
@@ -78,8 +78,7 @@ function Admin() {
         autoSlidesEvent();
     }
 
-    this.init = () => {
-        setModules();
-        setEvent();
-    }
-}
+    setModules();
+    setEvent();
+    
+}());

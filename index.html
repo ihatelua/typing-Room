@@ -52,8 +52,8 @@
                             
                             <div class="section2Base"></div>
                             
-                            <div class="sliderGradation-sideBar"></div>
-                            <div class="slideGradation" style="background: linear-gradient(90deg, #56BF67 0%, rgba(41, 152, 58, 0.557292) 58.72%, rgba(90, 255, 117, 0.269657) 99.99%, rgba(217, 217, 217, 0) 100%);"></div>
+                            <div class="sliderGradation-sideBar"></div><!-- 4.65, 33.51, 13.59 \\\\\\ rgba(86, 191, 103, 1) 0%, rgba(90, 255, 117, 0.2) 100%      숫자, 가운데 255, 15올라감 || 앞숫자가 90위면 숫자, 가운데15올라감, 255-->
+                            <div class="sliderGradation" style="background: linear-gradient(90deg, rgb(50, 214, 200) 0%, rgba(50, 255, 215, 0.201) 100%, rgba(217, 217, 217, 0) 100%);"></div>
                             <div class="sliderGradation-black"></div>
                             
                             <div class="info">
@@ -96,8 +96,8 @@
                         <div class="slide">
                             <div class="section2Base"></div>
 
-                            <div class="sliderGradation-sideBar"></div>
-                            <div class="slideGradation" style="background: linear-gradient(90deg, #000000 0%, rgba(6, 20, 9, 0.557292) 54.17%, rgba(217, 217, 217, 0) 100%);"></div>
+                            <div class="sliderGradation-sideBar"></div><!-- (15.29, 51, 25.5)    85.10-->
+                            <div class="sliderGradation" style="background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(6, 20, 9, 0.5) 54.17%, rgba(217, 217, 217, 0) 100%);"></div>
                             <div class="sliderGradation-black"></div>
                             
                             <div class="info">
@@ -142,7 +142,7 @@
                             <div class="section2Base"></div>
 
                             <div class="sliderGradation-sideBar"></div>
-                            <div class="slideGradation" style="background: linear-gradient(90deg, #000000 0%, rgba(6, 20, 9, 0.557292) 54.17%, rgba(217, 217, 217, 0) 100%);"></div>
+                            <div class="sliderGradation" style="background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(6, 20, 9, 0.557292) 54.17%, rgba(217, 217, 217, 0) 100%);"></div>
                             <div class="sliderGradation-black"></div>
                             
                             <div class="info">
@@ -187,7 +187,7 @@
                             <div class="section2Base"></div>
 
                             <div class="sliderGradation-sideBar"></div>
-                            <div class="slideGradation" style="background: linear-gradient(90deg, #000000 0%, rgba(6, 20, 9, 0.557292) 54.17%, rgba(217, 217, 217, 0) 100%);"></div>
+                            <div class="sliderGradation" style="background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(6, 20, 9, 0.557292) 54.17%, rgba(217, 217, 217, 0) 100%);"></div>
                             <div class="sliderGradation-black"></div>
                             
                             <div class="info">
@@ -247,14 +247,7 @@
                 </div>
 
                 <script>
-                    let counter = 2;
-                    setInterval(() => {
-                        document.getElementById("radio" + counter).checked = true;
-                        counter++;
-                        if(counter > 4){
-                            counter = 1;
-                        }
-                    }, 5000)
+                    
                 </script>
             </div>
         </section>
@@ -274,40 +267,7 @@
     </footer>
 </body>
 <script>
-    // 메뉴선택시 스크롤
-    let sections = document.getElementsByClassName("gnb")[0].children;
-    for(let i = 0; i < sections.length; i++){
-        let section = sections[i].firstChild;
-        section.addEventListener('click', (e) => {
-            let target = e.target;
-
-            // selected 변경
-            if(document.getElementsByClassName("selected")[0] != 'undefined'){
-                document.getElementsByClassName("selected")[0].className = ""
-            }
-            e.target.className = "selected"
-
-            // 스크롤 이동
-            let href = target.attributes.href.value.substr(1);
-            let offset = document.getElementsByClassName(href)[0].offsetTop
-            window.scrollTo({top: offset-100, behavior: 'smooth'});
-        });
-    }
-
-    // 스크롤시 메뉴선택
-    window.addEventListener("scroll", () => {
-        let scrollY = window.scrollY;
-        let scrolls = document.getElementsByClassName("scroll");
-        let sections = document.getElementsByClassName("gnb")[0].children;
-        for(let i = 0; i < scrolls.length; i++){
-            let offsetTop = document.getElementsByClassName("scroll")[i].offsetTop;
-            if(offsetTop-150 <= scrollY){
-                if(document.getElementsByClassName("selected")[0] != 'undefined'){
-                    document.getElementsByClassName("selected")[0].className = ""
-                }
-                sections[i].firstChild.className = "selected";
-            }
-        }
-    });
+    
 </script>
+<script src="./js/index/IndexManager.js" type="module"></script>
 </html>

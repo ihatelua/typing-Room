@@ -6,7 +6,7 @@ import NormalManager from '../game/NormalManager.js';       // 노말맵 모듈�
 import resultModalManager from '../Typing/resultModalManager.js';
 
 
-function Admin() {
+(function Admin() {
     const request = new Request();
     const percentCount = document.getElementById("count");  // wave 퍼센트 셀렉터
     const typingMain = new TypingManager();                 // 타이핑매니저 선언
@@ -65,11 +65,6 @@ function Admin() {
     }
 
 
-    this.init = () => {
-        setModules();
-        setEvent();
-    }
-}
-
-let admin = new Admin();
-admin.init();
+    setModules();
+    setEvent();
+}());

@@ -417,7 +417,7 @@ section.intro > .blue{
     display: table-caption;
 }
 
-.slide div.slideGradation{
+.slide div.sliderGradation{
     position: relative;
     margin-top: -500px;
     width: 800px;
