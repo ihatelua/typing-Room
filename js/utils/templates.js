@@ -168,17 +168,23 @@ const createIndexSlideNavigationManualParent = selectArr => `<div class="navigat
 
 /**
  * 인덱스 슬라이드 세팅
+ * @param {부모 id} parentId
  * @param {인덱스 슬라이드 데이터} jsonArr
  */
-export const initIndexSlideTemp = jsonArr => {
+export const initIndexSlideTemp = (parentId, jsonArr) => {
     let length = jsonArr.length;
     let selectArr = Array.from({length}, (v, i) => i+1);  // [1,2,3,4...]
-    return [
+    
+    const resultTemp = [
+        '<div class="slides" id="slides">',
         createIndexSlideRadioParent(selectArr),                 // 라디오 버튼
         createIndexSlideContentParent(jsonArr),                 // 슬라이드 설명
         createIndexSlideNavigationAutoParent(selectArr),        // 네비게이션 auto
+        '</div>',
         createIndexSlideNavigationManualParent(selectArr),      // 네비게이션 manual
-    ].join('')
+    ].join('');
+
+    document.getElementById(parentId).innerHTML = resultTemp;
 }
 
 

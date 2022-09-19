@@ -62,7 +62,7 @@ import {initIndexSlideTemp} from '../utils/templates.js';
      * 모듈 및 템플릿 세팅
      */
     const setModules = () => {
-        initIndexSlideTemp([
+        initIndexSlideTemp('slider', [
             {
                 red: '50',
                 green: '214',
