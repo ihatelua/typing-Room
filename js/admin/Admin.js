@@ -1,6 +1,6 @@
 import {model, chartModalModel} from './AdminInitData.js';                        // admin 초기화 데이터
 import util from '../utils/util.js';
-import Request from '../utils/Request.js';
+import Request from '../utils/request.js';
 import TypingManager from '../Typing/TypingManager.js';     // 타이핑 모듈을 가져온다.
 import NormalManager from '../game/NormalManager.js';       // 노말맵 모듈을 가져온다.
 import resultModalManager from '../Typing/resultModalManager.js';
