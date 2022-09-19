@@ -15,6 +15,8 @@ const createIndexSlideRadioChild = index => `<input type="radio" name="radio-btn
 
 /**
  * 인덱스 슬라이드 내용을 세팅할 부모 템플릿
+ * @param {슬라이드 모든 데이터} json 
+ * @returns 
  */
 const createIndexSlideContentParent = (jsonArr) => {
     return jsonArr.map((temp, index) => {
@@ -28,7 +30,8 @@ const createIndexSlideContentParent = (jsonArr) => {
 
 /**
  * 인덱스 슬라이드 내용을 세팅할 템플릿
- * @param {} json 
+ * @param {인덱스} index
+ * @param {슬라이드 내용} json 
  * @returns 
  */
 const createIndexSlideContentChild = (index, json) => {
@@ -79,6 +82,11 @@ const createIndexSlideContentChild = (index, json) => {
     `
 }
 
+/**
+ * 인덱스 빈 슬라이드 세팅 템플릿
+ * @param {인덱스} index 
+ * @returns 
+ */
 const createIndexSlideContentBlankChild = (index) => {
     return `
         <div class="slide ${index == 0 ? `first` : ``}">
