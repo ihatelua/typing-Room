@@ -8,7 +8,6 @@ body{
 }
 
 div#main{
-    /* background-image: url(rpg4.png); */
     zoom:1.1;
     position: absolute;
     background-color: #ffffff;
@@ -22,11 +21,9 @@ div#main{
     border: solid 1px gray;
     border-style: none;
     border-radius: 8px;
-    /* box-shadow: 5px 5px 5px ; */
 }
 
 div#main.main_darkMode{
-    /* background-image: url(rpg4.png); */
     background-color: rgb(56, 56, 56);
 }
 
@@ -54,9 +51,6 @@ div#mainhead{
 /* 2단 */
 .indicater{
     position: absolute;
-    /* background-image: url(indicate.png);
-    background-size: 100%;
-    background-position: 0cm -10px;  */
     background-color: #ffffff;
     border-radius: 7px 7px 7px 7px;
     height: 31px;
@@ -66,18 +60,15 @@ div#mainhead{
     right: 50%;
     margin-left:-400px;
     margin-top:-10px;
-    /* border: solid 1px rgb(53, 70, 51); */
     border-style: none;
     font-size: 20px;
     text-align: center;
-    /* box-shadow: 5px 5px 5px ; */
 }
 .indicater.indicater_darkMode{
     background-color: rgb(56, 56, 56);
 }
 
 .speed {
-    /* border: 1px solid green; */
     float: left;
     width:30%;
     color: Gray;
@@ -85,8 +76,6 @@ div#mainhead{
 }
 
 .accuracy{
-    /* background-color: #ffffff;
-    border: 1px solid green; */
     float: left;
     margin-left: 5%;
     width:30%;
@@ -95,7 +84,6 @@ div#mainhead{
 }
 
 .count{
-    /* border: 1px solid green; */
     float: right;
     width:30%;
     color: Gray;
@@ -119,7 +107,6 @@ div#mainhead{
     top: -2%;
     margin-left: -105px;
     border-radius: 0px 0px 10px 10px;
-    /* box-shadow: 1px 1px 2px; */
 }
 .recode {
     position: absolute;

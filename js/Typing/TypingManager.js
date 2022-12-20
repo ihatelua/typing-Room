@@ -115,10 +115,11 @@ export default function TypingManager() {
      * 결과값 세팅
      */
     const setResultBox = () => {
-        document.getElementById("resultPrevSpeed").innerHTML    = archive.prevSpeed;   // 최근타수
-        document.getElementById("resultAcc").innerHTML          = archive.accuracy;    // 정확도
-        document.getElementById("resultMax").innerHTML          = archive.maxSpeed;    // 최고타수
-        document.getElementById("typingCount").innerHTML        = archive.count;       // 카운트
+        document.getElementById("resultPrevSpeed").innerHTML    = archive.prevSpeed;   // 실시간 최근타수
+        document.getElementById("resultAcc").innerHTML          = archive.accuracy;    // 실시간 정확도
+        document.getElementById("resultMax").innerHTML          = archive.maxSpeed;    // 실시간 최고타수
+        document.getElementById("typingCount").innerHTML        = archive.count;       // 결과 카운트
+        document.getElementById("typingAcc").innerHTML          = archive.accuracy;    // 결과 정확도
     }
 
     /**
