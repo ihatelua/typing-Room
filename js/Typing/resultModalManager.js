@@ -29,6 +29,21 @@ export default function resultModalManager()  {
       , legendName : ""
     }];
 
+    // 등급 가져오기
+    const getChartGrade = data => ({
+          [0  < data && data <= 5  ]  : "S+"
+        , [5  < data && data <= 10 ]  : "S"
+        , [10 < data && data <= 20 ]  : "A+"
+        , [20 < data && data <= 30 ]  : "A"
+        , [30 < data && data <= 40 ]  : "A-"
+        , [40 < data && data <= 50 ]  : "B+"
+        , [50 < data && data <= 60 ]  : "B"
+        , [60 < data && data <= 70 ]  : "C"
+        , [70 < data && data <= 80 ]  : "D"
+        , [80 < data && data <= 90 ]  : "E"
+        , [90 < data && data <= 100]  : "F"
+    }[true])
+
     /**
      * 모달 세팅
      */
@@ -95,22 +110,6 @@ export default function resultModalManager()  {
         this.createModal();   
     }
 
-   
-    const getChartGrade = (chartGrade, data) => 
-        chartGradeJSON = {
-              [0  < data && data <= 5   ?  'P' : 'F']  : "S+"
-            , [5  < data && data <= 10  ?  'P' : 'F']  : "S"
-            , [10 < data && data <= 20  ?  'P' : 'F']  : "A+"
-            , [20 < data && data <= 30  ?  'P' : 'F']  : "A"
-            , [30 < data && data <= 40  ?  'P' : 'F']  : "A-"
-            , [40 < data && data <= 50  ?  'P' : 'F']  : "B+"
-            , [50 < data && data <= 60  ?  'P' : 'F']  : "B"
-            , [60 < data && data <= 70  ?  'P' : 'F']  : "C"
-            , [70 < data && data <= 80  ?  'P' : 'F']  : "D"
-            , [80 < data && data <= 90  ?  'P' : 'F']  : "E"
-            , [90 < data && data <= 100 ?  'P' : 'F']  : "F"
-        }['P']
-
     const setChartGrade = (domId, percentArr) => {
         let chartGrade = document.getElementsByClassName(domId)[0].children[0];
         let sum = 0;
@@ -119,7 +118,7 @@ export default function resultModalManager()  {
             sum += data;
         });
         arg = sum / percentArr.length;
-        chartGrade.innerHTML = getChartGrade(chartGrade, arg);
+        chartGrade.innerHTML = getChartGrade(arg);
     }
 
     this.setBaseModalData = (data) => {
