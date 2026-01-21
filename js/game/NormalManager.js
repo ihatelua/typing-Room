@@ -1,85 +1,124 @@
-import {NORMAL_LEVEL_1, NORMAL_LEVEL_2, NORMAL_LEVEL_3, NORMAL_LEVEL_4, NORMAL_LEVEL_5} from '../utils/constants.js';   // 노말 데이터를 가져온다.
-import {initGameRoomTemp} from '../utils/templates.js'  // 룸 데이터 세팅모듈을 가져온다.
+import {
+    NORMAL_LEVEL_1, NORMAL_LEVEL_2, NORMAL_LEVEL_3, 
+    NORMAL_LEVEL_4, NORMAL_LEVEL_5 
+} from '../utils/constants.js';
+import { initGameRoomTemp } from '../utils/templates.js'
 
-export default function NormalManager() {
-    const background = document.getElementById("mainhead");
-    let object;                 // 룸 요소
-    let gameRoom;               // 룸 svg 요소
-    let currentLevel;           // 현재 레벨
-    let currentRound;           // 현재 라운드 오브젝트
-    let currentObjectCount = 0         // 현재 라운드 수
-    let backgroundColor = "";
+/**
+ * 일반 게임 룸 관리 모듈
+ */
+class NormalManager {
+    constructor() {
+        this.background = document.getElementById("mainhead");
+        this.gameRoomElement = null;
+        this.gameRoomDocument = null;
+        this.currentLevel = 1;
+        this.currentObjectCount = 0;
+        this.backgroundColor = "";
 
-    // 룸 세팅
-    const initRoomSetting = (model) => {
-        backgroundColor = model.background;
-        currentLevel = model.level;
-
-        background.className = "mainhead " + backgroundColor;
-        initGameRoomTemp("normal", currentLevel);                // 노말맵 SVG 템플릿을 세팅한다.
-
-        document.getElementById("room").onload = function() {
-            object = document.querySelector('.room')
-            gameRoom = object.contentDocument
-            
-            currentRound = getLevelObject(currentLevel, currentObjectCount);           // 현재 오브젝트 저장
-            gameRoom.getElementsByClassName(currentRound)[0].classList.remove("none"); // 오브젝트 보이기
-            // gameRoom.getElementsByClassName(currentRound)[0].classList.add("view");    // 오브젝트 애니메이션 추가
-            gameRoom.getElementsByClassName(currentRound)[0].classList.add("vibration");    // 오브젝트 애니메이션 추가
+        this.LEVEL_DATA = {
+            1: NORMAL_LEVEL_1,
+            2: NORMAL_LEVEL_2,
+            3: NORMAL_LEVEL_3,
+            4: NORMAL_LEVEL_4,
+            5: NORMAL_LEVEL_5
         };
-    };
+    }
 
-    
-    const nextRoomObject = () => {
-        // 다음라운드로
-        if(getLevelLength[currentLevel] != currentObjectCount + 1){
-            currentRound = getLevelObject(currentLevel, ++currentObjectCount);
-            gameRoom.getElementsByClassName(currentRound)[0].classList.remove("none");      // 오브젝트 보이기
-            gameRoom.getElementsByClassName(currentRound)[0].classList.add("vibration");    // 오브젝트 애니메이션 추가
-        } else{  // 다음레벨로
-            currentObjectCount = 0;
-            object.remove();
-            initRoomSetting({level: ++currentLevel, background: backgroundColor})
+    /**
+     * 룸 설정 초기화
+     */
+    initRoomSetting(model) {
+        this.backgroundColor = model.background;
+        this.currentLevel = model.level;
+        this.currentObjectCount = 0;
+
+        this.background.className = `mainhead ${this.backgroundColor}`;
+        initGameRoomTemp("normal", this.currentLevel);
+
+        this.setupRoomLoadHandler();
+    }
+
+    /**
+     * 룸 로드 완료 핸들러
+     */
+    setupRoomLoadHandler() {
+        const roomElement = document.getElementById("room");
+        roomElement.onload = () => {
+            this.gameRoomElement = document.querySelector('.room');
+            this.gameRoomDocument = this.gameRoomElement.contentDocument;
+
+            this.displayCurrentObject();
+        };
+    }
+
+    /**
+     * 현재 오브젝트 표시
+     */
+    displayCurrentObject() {
+        const objectName = this.getCurrentObjectName();
+        const objects = this.gameRoomDocument.getElementsByClassName(objectName);
+        
+        if (objects.length > 0) {
+            objects[0].classList.remove("none");
+            objects[0].classList.add("vibration");
         }
     }
 
-    const getCurrentLevel = () => {
-        return currentLevel;
+    /**
+     * 다음 오브젝트 로드
+     */
+    nextRoomObject() {
+        const levelLength = this.getLevelLength();
+
+        if (this.currentObjectCount + 1 < levelLength) {
+            this.currentObjectCount++;
+            this.displayCurrentObject();
+        } else {
+            this.moveToNextLevel();
+        }
     }
 
-    const getCurrentObjectCount = () => {
-        return currentObjectCount;
+    /**
+     * 다음 레벨로 이동
+     */
+    moveToNextLevel() {
+        this.currentObjectCount = 0;
+        this.gameRoomElement.remove();
+        this.initRoomSetting({
+            level: this.currentLevel + 1,
+            background: this.backgroundColor
+        });
     }
 
-    // 레벨의 총 길이를 가져온다.
-    const getLevelLength = {
-        1: NORMAL_LEVEL_1.length
-      , 2: NORMAL_LEVEL_2.length
-      , 3: NORMAL_LEVEL_3.length
-      , 4: NORMAL_LEVEL_4.length
-      , 5: NORMAL_LEVEL_5.length
-      , default: undefined
+    /**
+     * 현재 오브젝트 이름 획득
+     */
+    getCurrentObjectName() {
+        const levelData = this.LEVEL_DATA[this.currentLevel];
+        return levelData[this.currentObjectCount];
     }
 
-
-    // 레벨의 오브젝트 값을 가져온다.
-    const levelObjectJSON = {
-        1: cnt => NORMAL_LEVEL_1[cnt]
-      , 2: cnt => NORMAL_LEVEL_2[cnt]
-      , 3: cnt => NORMAL_LEVEL_3[cnt]
-      , 4: cnt => NORMAL_LEVEL_4[cnt]
-      , 5: cnt => NORMAL_LEVEL_5[cnt]
-      , default: () => undefined
+    /**
+     * 현재 레벨 길이 획득
+     */
+    getLevelLength() {
+        return (this.LEVEL_DATA[this.currentLevel] || []).length;
     }
-    const getLevelObjectFn = (obj, defaultCase = 'default') => (expression, cnt) => (obj[expression] || obj[defaultCase])(cnt)
-    const getLevelObject = getLevelObjectFn(levelObjectJSON, 'default');
 
-    return {
-        initRoomSetting,
-        nextRoomObject,
-        getCurrentLevel,
-        getCurrentObjectCount
+    /**
+     * 현재 레벨 반환
+     */
+    getCurrentLevel() {
+        return this.currentLevel;
+    }
+
+    /**
+     * 현재 오브젝트 카운트 반환
+     */
+    getCurrentObjectCount() {
+        return this.currentObjectCount;
     }
 }
 
-NORMAL_LEVEL_1
+export default NormalManager;

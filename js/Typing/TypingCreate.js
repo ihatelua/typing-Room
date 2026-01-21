@@ -1,55 +1,51 @@
-import {defaultTypingData as Contents} from '../utils/TypingMockData.js';   // 샘플데이터를 가져온다.
-import {initTypingTemp} from '../utils/templates.js'                        // 샘플데이터를 세팅모듈을 가져온다.
+import { defaultTypingData as Contents } from '../utils/TypingMockData.js';
+import { initTypingTemp } from '../utils/templates.js'
 
 /**
- * 샘플데이터 Manager
- * @returns 
+ * 타이핑 콘텐츠 관리 모듈
  */
-export default function TypingCreate() {
-    const textSourceTemp = document.getElementById("textSourceTemp");
-    const typingTemp = document.getElementById("typingTemp");
-
-    /**
-     * 샘플데이터를 세팅한다.
-     * @param {TypingMockData} data 
-     */
-    const initTypingCreateTemp = () => {
-        const mockSize = Contents.length;
-        const rand = Math.floor(Math.random() * mockSize);
-        const selectContent = Contents[rand];
-
-        textSourceTemp.innerHTML = selectContent.author;
-        initTypingTemp(selectContent.contents);
-
-        return selectContent;
+class TypingCreate {
+    constructor() {
+        this.textSourceElement = document.getElementById("textSourceTemp");
+        this.typingContainer = document.getElementById("typingTemp");
+        this.currentContent = null;
     }
 
     /**
-     * 샘플데이터를 삭제한다.
+     * 랜덤 타이핑 콘텐츠 초기화
      */
-    const clearTypingTemp = () => {
-        textSourceTemp.innerHTML = "";
-        while (typingTemp.hasChildNodes()) {
-            typingTemp.removeChild(typingTemp.firstChild);
+    initTypingCreateTemp() {
+        const randomIndex = Math.floor(Math.random() * Contents.length);
+        this.currentContent = Contents[randomIndex];
+
+        this.textSourceElement.innerHTML = this.currentContent.author;
+        initTypingTemp(this.currentContent.contents);
+
+        return this.currentContent;
+    }
+
+    /**
+     * 타이핑 콘텐츠 초기화 (DOM 제거)
+     */
+    clearTypingTemp() {
+        this.textSourceElement.innerHTML = "";
+        while (this.typingContainer.hasChildNodes()) {
+            this.typingContainer.removeChild(this.typingContainer.firstChild);
         }
     }
 
     /**
-     * 샘플데이터를 초기화한다.
+     * 타이핑 스타일 초기화
      */
-    const resetTypingTemp = () => {
+    resetTypingTemp() {
         const tempContents = document.querySelectorAll("#tempContents");
-        for(let i = 0; i < tempContents.length; i++){
-            tempContents[i].className = "normal";
-            if(tempContents[i].innerHTML == "_"){
-                tempContents[i].innerHTML = " ";
+        tempContents.forEach(element => {
+            element.className = "normal";
+            if (element.innerHTML === "_") {
+                element.innerHTML = " ";
             }
-        }
-    }
-
-    return {
-        initTypingCreateTemp,
-        clearTypingTemp,
-        resetTypingTemp
+        });
     }
 }
+
+export default TypingCreate;

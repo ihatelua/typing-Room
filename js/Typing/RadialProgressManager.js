@@ -1,92 +1,108 @@
-import {initResultModalStyleTemp, initResultModalTemp, initResultChartFooterTemp} from '../utils/templates.js'                  // 샘플데이터를 세팅모듈을 가져온다.
+import {
+    initResultModalStyleTemp,
+    initResultModalTemp,
+    initResultChartFooterTemp
+} from '../utils/templates.js';
 
 /**
- * 원형차트 매니저
- * @param {원 사이즈} size 
- * @param {className} id 
- * @param {바 사이즈} barSize 
- * @param {바 색깔} barColor 
- * @param {백그라운드 색깔} backgroundColor 
- * @param {순서} zIndex 
+ * 원형 진행률 차트 관리 모듈
  */
- export default function RadialProgressManager(parentId, data)  {
-    let progress = 0;
-    let requestAnimationFrame = window.requestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.oRequestAnimationFrame ||
-        window.msRequestAnimationFrame;
+class RadialProgressManager {
+    constructor(parentId, data) {
+        this.parentId = parentId;
+        this.data = data;
+        this.progress = 0;
+        this.requestAnimFrameId = null;
 
-    // 선언과 동시에 차트 템플릿을 생성시킨다.
-    initResultModalStyleTemp(data.id, data.size, data.barSize, data.barColor, data.backgroundColor, data.zIndex);
-    initResultModalTemp(parentId, data.id);
-    
+        // 차트 템플릿 생성
+        initResultModalStyleTemp(data.id, data.size, data.barSize, data.barColor, data.backgroundColor, data.zIndex);
+        initResultModalTemp(parentId, data.id);
+    }
 
-    // 원형차트 삭제
-    const remove = () => {
-        let radialProgress = document.getElementsByClassName("radial-progress" + data.id)[0];
-        let style = document.getElementById(data.id + "Css");
+    /**
+     * 요청 애니메이션 프레임 가져오기
+     */
+    getRequestAnimationFrame() {
+        return window.requestAnimationFrame ||
+               window.mozRequestAnimationFrame ||
+               window.webkitRequestAnimationFrame ||
+               window.oRequestAnimationFrame ||
+               window.msRequestAnimationFrame;
+    }
+
+    /**
+     * 원형 차트 제거
+     */
+    remove() {
+        const requestAnimFrame = this.getRequestAnimationFrame();
+        const radialProgress = document.getElementsByClassName(`radial-progress${this.data.id}`)[0];
+        const style = document.getElementById(`${this.data.id}Css`);
         let scale = 1;
-        let deltaScale = 0.1 / 10;
+        const deltaScale = -1.1 / 8;
 
-        function step() {
+        const step = () => {
             scale += deltaScale;
-            scale = (scale < 0) ? 0 : scale;
-            radialProgress.style.transform = 'scale(' + scale + ')';
-
-            if (scale > 1.1) {
-                deltaScale = -1.1 / 8;
-            }
+            scale = Math.max(0, scale);
+            radialProgress.style.transform = `scale(${scale})`;
 
             if (scale > 0) {
-                requestAnimationFrame(step);
+                requestAnimFrame(step);
             } else {
                 document.getElementsByTagName('head')[0].removeChild(style);
                 document.getElementById("resultModal").removeChild(radialProgress);
             }
-        }
+        };
 
-        requestAnimationFrame(step);
-    };
-
-    // 퍼센트바 세팅
-    const setProgress = (percent, duration, id, name) => {
-        let radialProgress = document.getElementsByClassName("radial-progress" + id)[0];
-        percent = (percent > 100) ? 100 : percent;
-        let $maskFull = radialProgress.getElementsByClassName('mask' + id + ' full' + id)[0];
-        let $fill = radialProgress.getElementsByClassName('fill' + id);
-        let $fillFix = radialProgress.getElementsByClassName('fill' + id + ' fix' + id)[0];
-        let deltaProgress = (percent - progress) / (duration * 60);
-
-        function step() {
-            progress += deltaProgress;
-            progress = (progress > percent) ? percent : progress;
-            let rotate = progress * 1.8;
-            $maskFull.style.transform = 'rotate(' + rotate + 'deg)';
-
-            for (var i = 0; i < $fill.length; ++i) {
-                $fill[i].style.transform = 'rotate(' + rotate + 'deg)';
-            }
-
-            $fillFix.style.transform = 'rotate(' + 2 * rotate + 'deg)';
-
-            if (progress < percent) {
-                requestAnimationFrame(step);
-            }
-
-            if (progress === percent) {
-                // setTimeout(function() {
-                //     remove();   // 종료
-                // }, 1000);
-                initResultChartFooterTemp("chartFooter", {"legendColor" : data.barColor, "legendName": name, "legendId": id, "legendPercent": percent})
-            }
-        }
-
-        requestAnimationFrame(step);
-    };  
-
-    return {
-        remove,
-        setProgress
+        requestAnimFrame(step);
     }
-};
+
+    /**
+     * 진행률 바 설정 및 애니메이션
+     */
+    setProgress(percent, duration, id, name) {
+        const requestAnimFrame = this.getRequestAnimationFrame();
+        const radialProgress = document.getElementsByClassName(`radial-progress${id}`)[0];
+        
+        percent = Math.min(100, Math.max(0, percent));
+        
+        const maskFull = radialProgress.getElementsByClassName(`mask${id} full${id}`)[0];
+        const fills = radialProgress.getElementsByClassName(`fill${id}`);
+        const fillFix = radialProgress.getElementsByClassName(`fill${id} fix${id}`)[0];
+        
+        const deltaProgress = (percent - this.progress) / (duration * 60);
+        let currentProgress = this.progress;
+
+        const step = () => {
+            currentProgress += deltaProgress;
+            currentProgress = Math.min(currentProgress, percent);
+
+            const rotate = currentProgress * 1.8;
+
+            maskFull.style.transform = `rotate(${rotate}deg)`;
+
+            for (let i = 0; i < fills.length; i++) {
+                fills[i].style.transform = `rotate(${rotate}deg)`;
+            }
+
+            fillFix.style.transform = `rotate(${2 * rotate}deg)`;
+
+            if (currentProgress < percent) {
+                requestAnimFrame(step);
+            }
+
+            if (currentProgress === percent) {
+                this.progress = percent;
+                initResultChartFooterTemp("chartFooter", {
+                    legendColor: this.data.barColor,
+                    legendName: name,
+                    legendId: id,
+                    legendPercent: percent
+                });
+            }
+        };
+
+        requestAnimFrame(step);
+    }
+}
+
+export default RadialProgressManager;

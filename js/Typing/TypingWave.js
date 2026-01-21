@@ -1,41 +1,57 @@
 /**
- * wave Manager
+ * 파동 게이지 관리 모듈
  */
-export default function Wave() {
-    const percentCount = document.getElementById("count"); // wave 퍼센트 셀렉터
-    const percentWater = document.getElementById("water"); // wave water 셀렉터
-    let currentPercent = 0;
-
-    // wave 세팅
-    const setWave = (num) => {
-        percentCount.innerHTML = num;
-        percentWater.style.transform = 'translate(0'+','+(100-num)+'%)';
-        currentPercent = num;
+class Wave {
+    constructor() {
+        this.percentDisplay = document.getElementById("count");
+        this.waveElement = document.getElementById("water");
+        this.currentPercent = 0;
     }
 
-    // wave 퍼센트 추가
-    const addWave = (num, resultData) => {
-        if(currentPercent + num < 100){
-            currentPercent += num;
-            percentCount.innerHTML = currentPercent;
-            percentWater.style.transform = 'translate(0'+','+(100-(currentPercent))+'%)';
-        }else{
-            currentPercent = (currentPercent + num) - 100;
-            percentCount.innerHTML = currentPercent;
-            percentWater.style.transform = 'translate(0'+','+(100-(currentPercent))+'%)';
-            percentCount.dispatchEvent(new CustomEvent("pass", {detail: resultData}));    // 커스텀 이벤트 실행
+    /**
+     * 파동 게이지 설정
+     */
+    setWave(percent) {
+        this.currentPercent = percent;
+        this.updateDisplay();
+    }
+
+    /**
+     * 파동 게이지 추가
+     */
+    addWave(addAmount, resultData) {
+        if (this.currentPercent + addAmount < 100) {
+            this.currentPercent += addAmount;
+        } else {
+            this.currentPercent = (this.currentPercent + addAmount) - 100;
+            this.dispatchPassEvent(resultData);
         }
+
+        this.updateDisplay();
     }
 
-    // 현재 wave의 퍼센트를 가져온다.
-    const getWaveCurrentPercent = () => {
-        return currentPercent;
+    /**
+     * 게이지 표시 업데이트
+     */
+    updateDisplay() {
+        this.percentDisplay.innerHTML = this.currentPercent;
+        this.waveElement.style.transform = `translate(0, ${100 - this.currentPercent}%)`;
     }
-    
 
-    return {
-        setWave,
-        addWave,
-        getWaveCurrentPercent
-    };
+    /**
+     * 완료 이벤트 발생
+     */
+    dispatchPassEvent(resultData) {
+        const event = new CustomEvent("pass", { detail: resultData });
+        this.percentDisplay.dispatchEvent(event);
+    }
+
+    /**
+     * 현재 게이지 비율 반환
+     */
+    getWaveCurrentPercent() {
+        return this.currentPercent;
+    }
 }
+
+export default Wave;

@@ -1,138 +1,185 @@
 import RadialProgressManager from './RadialProgressManager.js';
-import {initResultModalBaseTemp} from '../utils/templates.js';
+import { initResultModalBaseTemp } from '../utils/templates.js';
 
 /**
- * 결과모달창 매니저
+ * 결과 모달 관리 모듈
  */
-export default function resultModalManager()  {
-    let time;
-    let time2;
-    let chartGradeJSON = {};
-
-    // 결과모달창 베이스 데이터
-    let baseModalData = {
-        titleDate : ""
-      , roomSrc : ""
-      , maxSpeed : ""
-      , avgSpeed : ""
-      , accPercent : ""
-    }; 
-
-    // 결과모달창 차트 데이터
-    let chartModalData = [{
-        id: ""
-      , size : ""
-      , barSize : ""
-      , barColor : ""
-      , backgroundColor : ""
-      , zIndex : ""
-      , legendName : ""
-    }];
-
-    // 등급 가져오기
-    const getChartGrade = data => ({
-          [0  < data && data <= 5  ]  : "S+"
-        , [5  < data && data <= 10 ]  : "S"
-        , [10 < data && data <= 20 ]  : "A+"
-        , [20 < data && data <= 30 ]  : "A"
-        , [30 < data && data <= 40 ]  : "A-"
-        , [40 < data && data <= 50 ]  : "B+"
-        , [50 < data && data <= 60 ]  : "B"
-        , [60 < data && data <= 70 ]  : "C"
-        , [70 < data && data <= 80 ]  : "D"
-        , [80 < data && data <= 90 ]  : "E"
-        , [90 < data && data <= 100]  : "F"
-    }[true])
+class ResultModalManager {
+    constructor() {
+        this.baseModalData = this.initializeBaseModalData();
+        this.chartModalData = this.initializeChartModalData();
+        this.animationTimeouts = [];
+        this.chartArray = [];
+    }
 
     /**
-     * 모달 세팅
+     * 베이스 모달 데이터 초기화
      */
-    this.createModal = () => {
+    initializeBaseModalData() {
+        return {
+            titleDate: "",
+            roomSrc: "",
+            maxSpeed: "",
+            avgSpeed: "",
+            accPercent: ""
+        };
+    }
+
+    /**
+     * 차트 모달 데이터 초기화
+     */
+    initializeChartModalData() {
+        return [{
+            id: "",
+            size: "",
+            barSize: "",
+            barColor: "",
+            backgroundColor: "",
+            zIndex: "",
+            legendName: ""
+        }];
+    }
+
+    /**
+     * 성적 등급 계산
+     */
+    getChartGrade(percent) {
+        const grades = [
+            { min: 0, max: 5, grade: "S+" },
+            { min: 5, max: 10, grade: "S" },
+            { min: 10, max: 20, grade: "A+" },
+            { min: 20, max: 30, grade: "A" },
+            { min: 30, max: 40, grade: "A-" },
+            { min: 40, max: 50, grade: "B+" },
+            { min: 50, max: 60, grade: "B" },
+            { min: 60, max: 70, grade: "C" },
+            { min: 70, max: 80, grade: "D" },
+            { min: 80, max: 90, grade: "E" },
+            { min: 90, max: 100, grade: "F" }
+        ];
+
+        const gradeData = grades.find(g => percent > g.min && percent <= g.max);
+        return gradeData ? gradeData.grade : "F";
+    }
+
+    /**
+     * 모달 생성
+     */
+    createModal() {
         initResultModalBaseTemp("modal-container", {
-            titleDate     : baseModalData.titleDate
-            , roomSrc     : baseModalData.roomSrc
-            , maxSpeed    : baseModalData.maxSpeed
-            , avgSpeed    : baseModalData.avgSpeed
-            , accPercent  : baseModalData.accPercent
-        })
-        setEvent();
-    }
-    
-    /**
-     * 모달 이벤트
-     */
-    const setEvent = () => {
-        // createChartEvent 함수를 실행해서 모달을 열도록 해야함
-        // document.getElementById("confirm").addEventListener('click', this.createChartEvent); 
-        document.getElementById("modalWrap").addEventListener('click', this.resetModal);
+            titleDate: this.baseModalData.titleDate,
+            roomSrc: this.baseModalData.roomSrc,
+            maxSpeed: this.baseModalData.maxSpeed,
+            avgSpeed: this.baseModalData.avgSpeed,
+            accPercent: this.baseModalData.accPercent
+        });
+
+        this.setupEventListeners();
     }
 
     /**
-     * 모달 차트 이벤트
-     * @comment new RadialProgressManager("circleChart", 'A', 180, 10, '#EB6540', '#FFF', '60')
+     * 이벤트 리스너 설정
      */
-     this.createChartEvent = () => {
-        // 모달 백그라운드 클래스 삭제
-        document.getElementsByClassName("modalWrap")[0].classList.remove("none");
+    setupEventListeners() {
+        const modalWrap = document.getElementById("modalWrap");
+        if (modalWrap) {
+            modalWrap.addEventListener('click', () => this.resetModal());
+        }
+    }
 
-        // 모달 차트 클래스 가져오기
-        let ChartArr = chartModalData.map(data => new RadialProgressManager("circleChart", data))
+    /**
+     * 차트 애니메이션 이벤트
+     */
+    createChartEvent() {
+        const modalWrap = document.getElementsByClassName("modalWrap")[0];
+        modalWrap.classList.remove("none");
 
-        // 나중에 ajax 로 상위 몇퍼센트 인지 가져올 라인
-        // 퍼센트를 가져와서 아래 차트애니메이션 데이터를 뿌린다.
+        // 차트 생성
+        this.chartArray = this.chartModalData.map(
+            data => new RadialProgressManager("circleChart", data)
+        );
 
-        // 1초 뒤에 차트 애니메이션 시작
-        time = setTimeout(function () {
-            ChartArr[0].setProgress(20, 0.5, "A", "최고타수");
-            ChartArr[1].setProgress(40, 0.5, "B", "평균타수");
-            ChartArr[2].setProgress(50, 0.5, "C", "정확도");
-        }, 1000);
+        // 1초 후 애니메이션 시작
+        this.animationTimeouts.push(
+            setTimeout(() => {
+                this.chartArray[0].setProgress(20, 0.5, "A", "최고타수");
+                this.chartArray[1].setProgress(40, 0.5, "B", "평균타수");
+                this.chartArray[2].setProgress(50, 0.5, "C", "정확도");
+            }, 1000)
+        );
 
-        time2 = setTimeout(function () {
-            setChartGrade("inner-circle" + chartModalData[2].id, [5,5,5])
-            document.getElementsByClassName("inner-circle" + chartModalData[2].id)[0].firstElementChild.classList.add("fadeIn")
-        }, 1500);
+        // 등급 표시
+        this.animationTimeouts.push(
+            setTimeout(() => {
+                this.displayChartGrade("inner-circle" + this.chartModalData[2].id, [5, 5, 5]);
+            }, 1500)
+        );
+    }
+
+    /**
+     * 차트 등급 표시
+     */
+    displayChartGrade(domId, percentArray) {
+        const average = percentArray.reduce((a, b) => a + b) / percentArray.length;
+        const grade = this.getChartGrade(average);
+
+        const elements = document.getElementsByClassName(domId);
+        if (elements.length > 0) {
+            const gradeElement = elements[0].firstElementChild;
+            gradeElement.innerHTML = grade;
+            gradeElement.classList.add("fadeIn");
+        }
     }
 
     /**
      * 모달 리셋
      */
-    this.resetModal = () => {
-        // 차트애니메이션 중지
-        clearTimeout(time);
-        clearTimeout(time2);
+    resetModal() {
+        // 애니메이션 중지
+        this.animationTimeouts.forEach(timeout => clearTimeout(timeout));
+        this.animationTimeouts = [];
 
-        // 모달 삭제
-        let modalContainer = document.getElementById("modal-container");    
-        modalContainer.innerHTML = "";
+        // 모달 내용 제거
+        const modalContainer = document.getElementById("modal-container");
+        if (modalContainer) {
+            modalContainer.innerHTML = "";
+        }
 
-        // 모달 재 세팅
-        this.createModal();   
-    }
-
-    const setChartGrade = (domId, percentArr) => {
-        let chartGrade = document.getElementsByClassName(domId)[0].children[0];
-        let sum = 0;
-        let arg = 0;
-        percentArr.forEach((data) => {
-            sum += data;
-        });
-        arg = sum / percentArr.length;
-        chartGrade.innerHTML = getChartGrade(arg);
-    }
-
-    this.setBaseModalData = (data) => {
-        baseModalData = data;
-    }
-
-    this.setChartModalData = (data) => {
-        chartModalData = data;
-    }
-
-    this.init = (baseModal, chartModal) => {
-        baseModalData = baseModal;
-        chartModalData = chartModal;
+        // 모달 재생성
         this.createModal();
     }
-    
+
+    /**
+     * 베이스 모달 데이터 설정
+     */
+    setBaseModalData(data) {
+        this.baseModalData = { ...this.baseModalData, ...data };
+    }
+
+    /**
+     * 차트 모달 데이터 설정
+     */
+    setChartModalData(data) {
+        this.chartModalData = Array.isArray(data) ? data : [data];
+    }
+
+    /**
+     * 모듈 초기화
+     */
+    init(baseModal, chartModal) {
+        this.setBaseModalData(baseModal);
+        this.setChartModalData(chartModal);
+        this.createModal();
+    }
+
+    /**
+     * 정리
+     */
+    destroy() {
+        this.animationTimeouts.forEach(timeout => clearTimeout(timeout));
+        this.animationTimeouts = [];
+        this.chartArray = [];
+    }
 }
+
+export default ResultModalManager;

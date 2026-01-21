@@ -1,74 +1,36 @@
-import {initIndexSlideTemp} from '../utils/templates.js';    
+import { initIndexSlideTemp } from '../utils/templates.js';
 
-(function IndexManager() {
-    /**
-     * 메뉴선택시 스크롤 이벤트
-     */
-    const selectedMenuEvent = () => {
-        let sections = document.getElementsByClassName("gnb")[0].children;
-        for(let i = 0; i < sections.length; i++){
-            let section = sections[i].firstChild;
-            section.addEventListener('click', (e) => {
-                let target = e.target;
+/**
+ * 인덱스 페이지 관리 모듈
+ */
+class IndexManager {
+    constructor() {
+        this.gnbElement = document.getElementsByClassName("gnb")[0];
+        this.scrollElements = document.getElementsByClassName("scroll");
+        this.autoSlideCounter = 2;
+        this.autoSlideInterval = null;
 
-                // selected 변경
-                if(document.getElementsByClassName("selected")[0] != 'undefined'){
-                    document.getElementsByClassName("selected")[0].className = ""
-                }
-                e.target.className = "selected"
-
-                // 스크롤 이동
-                let href = target.attributes.href.value.substr(1);
-                let offset = document.getElementsByClassName(href)[0].offsetTop
-                window.scrollTo({top: offset-100, behavior: 'smooth'});
-            });
-        }
-    }
-    
-    /**
-     * 스크롤시 메뉴선택 이벤트
-     */
-    const scrollMenuEvent = () => {
-        let scrollY = window.scrollY;
-        let scrolls = document.getElementsByClassName("scroll");
-        let sections = document.getElementsByClassName("gnb")[0].children;
-        for(let i = 0; i < scrolls.length; i++){
-            let offsetTop = document.getElementsByClassName("scroll")[i].offsetTop;
-            if(offsetTop-150 <= scrollY){
-                if(document.getElementsByClassName("selected")[0] != 'undefined'){
-                    document.getElementsByClassName("selected")[0].className = ""
-                }
-                sections[i].firstChild.className = "selected";
-            }
-        }
+        this.init();
     }
 
     /**
-     * section2 오토 슬라이드 이벤트
+     * 모듈 초기화
      */
-    const autoSlidesEvent = () => {
-        let counter = 2;
-        setInterval(() => {
-            document.getElementById("radio" + counter).checked = true;
-            counter++;
-            if(counter > 4){
-                counter = 1;
-            }
-        }, 5000);
+    init() {
+        this.setupModules();
+        this.setupEventListeners();
     }
 
-
-    /** 
-     * 모듈 및 템플릿 세팅
+    /**
+     * 모듈 및 템플릿 설정
      */
-    const setModules = () => {
-        // 슬라이드 템플릿 세팅
-        initIndexSlideTemp('slider', [
+    setupModules() {
+        const slideData = [
             {
                 red: '50',
                 green: '214',
                 blue: '200',
-                starArr: ['star','star','half-star','blank-star','blank-star'],
+                starArr: ['star', 'star', 'half-star', 'blank-star', 'blank-star'],
                 level: '5',
                 funitureCnt: '54',
                 question: 'RANDOM'
@@ -76,26 +38,116 @@ import {initIndexSlideTemp} from '../utils/templates.js';
             {},
             {},
             {}
-        ])
+        ];
+
+        initIndexSlideTemp('slider', slideData);
     }
 
     /**
-     * 이벤트 세팅
+     * 이벤트 리스너 설정
      */
-    const setEvent = () => {
-        // 메뉴선택시 스크롤
-        selectedMenuEvent();
-
-        // 스크롤시 메뉴선택
-        window.addEventListener("scroll", () => {
-            scrollMenuEvent();
-        });
-
-        // section2 오토 슬라이드 이벤트
-        autoSlidesEvent();
+    setupEventListeners() {
+        this.setupMenuClickEvent();
+        this.setupScrollEvent();
+        this.setupAutoSlideEvent();
     }
 
-    setModules();
-    setEvent();
-    
-}());
+    /**
+     * 메뉴 클릭 이벤트 설정
+     */
+    setupMenuClickEvent() {
+        for (let i = 0; i < this.gnbElement.children.length; i++) {
+            const link = this.gnbElement.children[i].firstChild;
+            link.addEventListener('click', (event) => this.handleMenuClick(event, i));
+        }
+    }
+
+    /**
+     * 메뉴 클릭 핸들러
+     */
+    handleMenuClick(event, index) {
+        event.preventDefault();
+        
+        this.updateSelectedMenu(index);
+
+        const target = event.target;
+        const sectionId = target.attributes.href.value.substr(1);
+        this.scrollToSection(sectionId);
+    }
+
+    /**
+     * 선택된 메뉴 업데이트
+     */
+    updateSelectedMenu(index) {
+        const selectedElement = document.getElementsByClassName("selected")[0];
+        if (selectedElement) {
+            selectedElement.className = "";
+        }
+        this.gnbElement.children[index].firstChild.className = "selected";
+    }
+
+    /**
+     * 섹션으로 스크롤
+     */
+    scrollToSection(sectionId) {
+        const section = document.getElementsByClassName(sectionId)[0];
+        if (section) {
+            const offset = section.offsetTop - 100;
+            window.scrollTo({ top: offset, behavior: 'smooth' });
+        }
+    }
+
+    /**
+     * 스크롤 이벤트 설정
+     */
+    setupScrollEvent() {
+        window.addEventListener("scroll", () => this.handleScroll());
+    }
+
+    /**
+     * 스크롤 핸들러
+     */
+    handleScroll() {
+        const scrollY = window.scrollY;
+
+        for (let i = 0; i < this.scrollElements.length; i++) {
+            const offsetTop = this.scrollElements[i].offsetTop;
+
+            if (offsetTop - 150 <= scrollY) {
+                this.updateSelectedMenu(i);
+            }
+        }
+    }
+
+    /**
+     * 자동 슬라이드 이벤트 설정
+     */
+    setupAutoSlideEvent() {
+        this.autoSlideInterval = setInterval(() => {
+            document.getElementById(`radio${this.autoSlideCounter}`).checked = true;
+            this.autoSlideCounter++;
+
+            if (this.autoSlideCounter > 4) {
+                this.autoSlideCounter = 1;
+            }
+        }, 5000);
+    }
+
+    /**
+     * 정리
+     */
+    destroy() {
+        if (this.autoSlideInterval) {
+            clearInterval(this.autoSlideInterval);
+        }
+    }
+}
+
+// 페이지 로드 시 초기화
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new IndexManager();
+    });
+} else {
+    new IndexManager();
+}
